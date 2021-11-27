@@ -1,14 +1,6 @@
-from flask import (
-    Flask,
-    render_template,
-)
+from flask import Flask
 
 app = Flask(__name__)
+app.secret_key = "this_will_need_to_be_changed_in_production"
 
-@app.route("/")
-def render_home():
-    return render_template("index.html")
-
-@app.route("/ping")
-def ping():
-    return "Pong"
+import routes

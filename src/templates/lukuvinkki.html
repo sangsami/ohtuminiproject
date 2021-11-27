@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Lukuvinkki
+{% endblock %}
+
+
+{% block body %}
+<h1>Add a lukuvinkki</h1>
+
+<form action="/lukuvinkki" method="post">
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul>
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+
+  <div>
+    <label for="title">Title</label><br />
+    <input type="text" name="title" id="title" />
+  </div>
+
+  <div>
+  <label for="author">Author</label><br />
+  <input type="text" name="author" id="author" />
+  </div>
+
+  <div>
+      <label for="description">Description</label><br />
+      <textarea name="description" id="description" rows="4" cols="50">
+
+      </textarea>
+  </div>
+
+  <div>
+    <label for="link">Link</label><br />
+    <input type="text" name="link" id="link" />
+    </div>
+
+  <div>
+    <label for="comment">Comment</label><br />
+    <textarea name="comment" id="comment" rows="2" cols="50">
+        
+    </textarea>
+</div>
+
+  <button>
+    Save
+  </button>
+
+</form>
+{% endblock %}
