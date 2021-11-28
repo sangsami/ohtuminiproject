@@ -18,7 +18,7 @@ class LukuvinkkiService:
             raise LukuvinkkiExistsError("The lukuvinkki already exists.")
         self._lukuvinkki_repository.create(Lukuvinkki(title, author, description, link, comment))
     
-    def get_lukuvinkkis():
-        return self._lukuvinkki_repository.get_lukuvinkkis()
+    def get_lukuvinkkis(self):
+        return self._lukuvinkki_repository.find_all()
 
 lukuvinkki_service = LukuvinkkiService()

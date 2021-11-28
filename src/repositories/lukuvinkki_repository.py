@@ -15,5 +15,8 @@ class LukuvinkkiRepository:
             if title == lukuvinkki.title() and author == lukuvinkki.author():
                 return True 
         return False
+    
+    def delete_all(self):
+        del self._lukuvinkkis[:]
 
 lukuvinkki_repository = LukuvinkkiRepository()
