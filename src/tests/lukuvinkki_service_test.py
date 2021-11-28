@@ -6,9 +6,6 @@ class TestLukuvinkki(unittest.TestCase):
     def setUp(self):
         self._lukuvinkki_repository = LukuvinkkiRepository()
         self._lukuvinkki_service = LukuvinkkiService(self._lukuvinkki_repository)
-        
-        
-        #"Another title", "Another author", "Another description", "Another link", "Another comment"
 
     def test_can_add_new_lukuvinkki(self):
         self._lukuvinkki_repository.delete_all()
