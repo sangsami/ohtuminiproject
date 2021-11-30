@@ -1,5 +1,7 @@
 import unittest
-from services.lukuvinkki_service import LukuvinkkiService, LukuvinkkiExistsError, LukuvinkkiTitleOrAuthor
+from services.lukuvinkki_service import (
+    LukuvinkkiService, LukuvinkkiExistsError, LukuvinkkiTitleOrAuthor
+)
 from repositories.lukuvinkki_repository import LukuvinkkiRepository
 
 
@@ -20,22 +22,28 @@ class TestLukuvinkki(unittest.TestCase):
         self._lukuvinkki_repository.delete_all()
         self._lukuvinkki_service.create_lukuvinkki(
             "A title", "An Author", "A description", "A link", "A comment")
-        self.assertRaises(LukuvinkkiExistsError, self._lukuvinkki_service.create_lukuvinkki,
-                          "A title", "An Author", "A description", "A link", "A comment")
+        self.assertRaises(
+            LukuvinkkiExistsError, self._lukuvinkki_service.create_lukuvinkki,
+            "A title", "An Author",
+            "A description", "A link", "A comment")
 
     def test_can_add_different_lukuvinkkis(self):
         self._lukuvinkki_repository.delete_all()
         self._lukuvinkki_service.create_lukuvinkki(
             "A title", "An Author", "A description", "A link", "A comment")
         self._lukuvinkki_service.create_lukuvinkki(
-            "Another title", "Another Author", "A description", "A link", "A comment")
+            "Another title", "Another Author",
+            "A description", "A link", "A comment")
         lukuvinkkis = self._lukuvinkki_service.get_lukuvinkkis()
         self.assertEqual(len(lukuvinkkis), 2)
 
     def test_cant_add_lukuvinkki_without_title(self):
-        self.assertRaises(LukuvinkkiTitleOrAuthor,
-                          self._lukuvinkki_service.create_lukuvinkki, "", "", "", "", "")
+        self.assertRaises(
+            LukuvinkkiTitleOrAuthor,
+            self._lukuvinkki_service.create_lukuvinkki, "", "", "", "", "")
 
     def test_cant_add_lukuvinkki_without_author(self):
-        self.assertRaises(LukuvinkkiTitleOrAuthor,
-                          self._lukuvinkki_service.create_lukuvinkki, "A title", "", "", "", "")
+        self.assertRaises(
+            LukuvinkkiTitleOrAuthor,
+            self._lukuvinkki_service.create_lukuvinkki,
+            "A title", "", "", "", "")
