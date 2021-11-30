@@ -1,5 +1,7 @@
 from entities.lukuvinkki import Lukuvinkki
-from repositories.lukuvinkki_repository import lukuvinkki_repository as default_lukuvinkki_repository
+from repositories.lukuvinkki_repository import (
+    lukuvinkki_repository as default_lukuvinkki_repository
+    )
 
 
 class LukuvinkkiExistsError(Exception):
