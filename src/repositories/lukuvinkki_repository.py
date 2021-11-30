@@ -1,4 +1,4 @@
-from entities.lukuvinkki import Lukuvinkki
+from entities.lukuvinkki import Lukuvinkki  # pylint: disable=unused-import
 
 
 class LukuvinkkiRepository:

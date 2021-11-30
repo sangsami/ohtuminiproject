@@ -1,12 +1,15 @@
 from flask import (
-    Flask,
     render_template,
     request,
     redirect,
     flash
 )
 from app import app
-from services.lukuvinkki_service import lukuvinkki_service
+from services.lukuvinkki_service import (
+    lukuvinkki_service,
+    LukuvinkkiExistsError,
+    LukuvinkkiTitleOrAuthor
+)
 
 
 @app.route("/")
@@ -31,7 +34,7 @@ def handle_lukuvinkki():
         lukuvinkki_service.create_lukuvinkki(
             title, author, description, link, comment)
         flash("The lukuvinkki was saved.")
-    except Exception as error:
+    except (LukuvinkkiTitleOrAuthor, LukuvinkkiExistsError) as error:
         flash(str(error))
 
     return redirect("/lukuvinkki")
