@@ -8,7 +8,7 @@ Lukuvinkki
 {% block body %}
 <h1>Add a lukuvinkki</h1>
 
-<form action="/lukuvinkki" method="post">
+<form action="/addlukuvinkki" method="POST">
   {% with messages = get_flashed_messages() %}
     {% if messages %}
       <ul>
@@ -31,26 +31,24 @@ Lukuvinkki
 
   <div>
       <label for="description">Description</label><br />
-      <textarea name="description" id="description" rows="4" cols="50">
-
-      </textarea>
+      <textarea name="description" id="description" rows="4" cols="50"></textarea>
   </div>
 
   <div>
     <label for="link">Link</label><br />
     <input type="text" name="link" id="link" />
-    </div>
+  </div>
 
   <div>
     <label for="comment">Comment</label><br />
-    <textarea name="comment" id="comment" rows="2" cols="50">
-        
-    </textarea>
-</div>
+    <textarea name="comment" id="comment" rows="2" cols="50"></textarea>
+  </div>
 
-  <button>
-    Save
-  </button>
+  <div class="btn-group">
+    <input type="submit" name="save_button" value="Save">
+    <input type="submit" name="view_button" value="View lukuvinkkis">
+  </div>
+  
 
 </form>
 {% endblock %}
