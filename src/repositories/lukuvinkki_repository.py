@@ -18,7 +18,7 @@ class LukuvinkkiRepository:
         return False
 
     def delete_all(self):
-        del self._lukuvinkkis[:]
+        self._lukuvinkkis = []
 
 
 lukuvinkki_repository = LukuvinkkiRepository()

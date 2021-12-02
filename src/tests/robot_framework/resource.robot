@@ -1,11 +1,11 @@
 *** Settings ***
 Library  SeleniumLibrary
-#Library  ../../AppLibrary.py
+Library  ../../AppLibrary.py
 
 *** Variables ***
 ${SERVER}  localhost:5000
 ${BROWSER}  chrome
-${DELAY}  0.2 seconds
+${DELAY}  0.1 seconds
 ${HOME URL}  http://${SERVER}
 ${ADDLUKUVINKKI URL}  http://${SERVER}/addlukuvinkki
 ${LUKUVINKKIVIEW URL}  http://${SERVER}/lukuvinkkiview
@@ -31,5 +31,5 @@ Go To Main Page
 Go To Add Lukuvinkki Page
     Go To  ${ADDLUKUVINKKI URL}
 
-Go TO Lukuvinkkiview Page
+Go To Lukuvinkkiview Page
     Go To  ${LUKUVINKKIVIEW URL}

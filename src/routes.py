@@ -5,6 +5,7 @@ from flask import (
     flash
 )
 from app import app
+from repositories.lukuvinkki_repository import lukuvinkki_repository
 from services.lukuvinkki_service import (
     lukuvinkki_service,
     LukuvinkkiExistsError,
@@ -54,3 +55,9 @@ def render_lukuvinkkiview():
 @app.route("/ping")
 def ping():
     return "Pong"
+
+
+@app.route("/tests/reset", methods = ["POST"])
+def reset_tests():
+    lukuvinkki_repository.delete_all()
+    return "Reset"
