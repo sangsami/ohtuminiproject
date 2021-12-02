@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 4.1.2 (Python 3.8.10 on linux)" generated="20211202 04:38:27.594" rpa="false" schemaversion="2">
+<suite id="s1" name="Robot Framework" source="/home/vilkiida/miniprojekti-ohtu/ohtuminiproject/src/tests/robot_framework">
+<suite id="s1-s1" name="Home" source="/home/vilkiida/miniprojekti-ohtu/ohtuminiproject/src/tests/robot_framework/home.robot">
+<kw name="Open and Configure Browser" library="resource" type="SETUP">
+<kw name="Open Browser" library="SeleniumLibrary">
+<arg>browser=${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<msg timestamp="20211202 04:38:27.707" level="INFO">Opening browser 'chrome' to base url 'None'.</msg>
+<status status="PASS" starttime="20211202 04:38:27.707" endtime="20211202 04:38:28.509"/>
+</kw>
+<kw name="Maximize Browser Window" library="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" starttime="20211202 04:38:28.509" endtime="20211202 04:38:28.613"/>
+</kw>
+<kw name="Set Selenium Speed" library="SeleniumLibrary">
+<arg>${DELAY}</arg>
+<doc>Sets the delay that is waited after each Selenium command.</doc>
+<status status="PASS" starttime="20211202 04:38:28.613" endtime="20211202 04:38:28.613"/>
+</kw>
+<status status="PASS" starttime="20211202 04:38:27.707" endtime="20211202 04:38:28.614"/>
+</kw>
+<test id="s1-s1-t1" name="Main Page Open">
+<kw name="Go To Main Page" library="resource" type="SETUP">
+<kw name="Go To" library="SeleniumLibrary">
+<arg>${HOME URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<msg timestamp="20211202 04:38:28.615" level="INFO">Opening url 'http://localhost:5000'</msg>
+<status status="PASS" starttime="20211202 04:38:28.615" endtime="20211202 04:38:29.171"/>
+</kw>
+<status status="PASS" starttime="20211202 04:38:28.614" endtime="20211202 04:38:29.171"/>
+</kw>
+<kw name="Main Page Should Be Open" library="resource">
+<kw name="Title Should Be" library="SeleniumLibrary">
+<arg>Lukuvinkki</arg>
+<doc>Verifies that the current page title equals ``title``.</doc>
+<msg timestamp="20211202 04:38:29.687" level="INFO">Page title is 'Lukuvinkki'.</msg>
+<status status="PASS" starttime="20211202 04:38:29.173" endtime="20211202 04:38:29.688"/>
+</kw>
+<status status="PASS" starttime="20211202 04:38:29.172" endtime="20211202 04:38:29.689"/>
+</kw>
+<status status="PASS" starttime="20211202 04:38:28.614" endtime="20211202 04:38:29.689"/>
+</test>
+<test id="s1-s1-t2" name="Click Add Lukuvinkki Link">
+<kw name="Go To Main Page" library="resource" type="SETUP">
+<kw name="Go To" library="SeleniumLibrary">
+<arg>${HOME URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<msg timestamp="20211202 04:38:29.692" level="INFO">Opening url 'http://localhost:5000'</msg>
+<status status="PASS" starttime="20211202 04:38:29.692" endtime="20211202 04:38:30.223"/>
+</kw>
+<status status="PASS" starttime="20211202 04:38:29.691" endtime="20211202 04:38:30.224"/>
+</kw>
+<kw name="Click Link" library="SeleniumLibrary">
+<arg>Add lukuvinkki</arg>
+<doc>Clicks a link identified by ``locator``.</doc>
+<msg timestamp="20211202 04:38:30.225" level="INFO">Clicking link 'Add lukuvinkki'.</msg>
+<status status="PASS" starttime="20211202 04:38:30.224" endtime="20211202 04:38:31.840"/>
+</kw>
+<kw name="Add Lukuvinkki Page Should Be Open" library="resource">
+<kw name="Title Should Be" library="SeleniumLibrary">
+<arg>Lukuvinkki-Add</arg>
+<doc>Verifies that the current page title equals ``title``.</doc>
+<msg timestamp="20211202 04:38:32.354" level="INFO">Page title is 'Lukuvinkki-Add'.</msg>
+<status status="PASS" starttime="20211202 04:38:31.843" endtime="20211202 04:38:32.355"/>
+</kw>
+<status status="PASS" starttime="20211202 04:38:31.841" endtime="20211202 04:38:32.356"/>
+</kw>
+<status status="PASS" starttime="20211202 04:38:29.691" endtime="20211202 04:38:32.356"/>
+</test>
+<test id="s1-s1-t3" name="Click View All Lukuvinkkis Link">
+<kw name="Go To Main Page" library="resource" type="SETUP">
+<kw name="Go To" library="SeleniumLibrary">
+<arg>${HOME URL}</arg>
+<doc>Navigates the current browser window to the provided ``url``.</doc>
+<msg timestamp="20211202 04:38:32.359" level="INFO">Opening url 'http://localhost:5000'</msg>
+<status status="PASS" starttime="20211202 04:38:32.359" endtime="20211202 04:38:32.888"/>
+</kw>
+<status status="PASS" starttime="20211202 04:38:32.359" endtime="20211202 04:38:32.889"/>
+</kw>
+<kw name="Click Link" library="SeleniumLibrary">
+<arg>View all lukuvinkkis</arg>
+<doc>Clicks a link identified by ``locator``.</doc>
+<msg timestamp="20211202 04:38:32.890" level="INFO">Clicking link 'View all lukuvinkkis'.</msg>
+<status status="PASS" starttime="20211202 04:38:32.889" endtime="20211202 04:38:34.488"/>
+</kw>
+<kw name="Lukuvinkkiview Page Should Be Open" library="resource">
+<kw name="Title Should Be" library="SeleniumLibrary">
+<arg>Lukuvinkki-View</arg>
+<doc>Verifies that the current page title equals ``title``.</doc>
+<msg timestamp="20211202 04:38:35.006" level="INFO">Page title is 'Lukuvinkki-View'.</msg>
+<status status="PASS" starttime="20211202 04:38:34.490" endtime="20211202 04:38:35.006"/>
+</kw>
+<status status="PASS" starttime="20211202 04:38:34.489" endtime="20211202 04:38:35.007"/>
+</kw>
+<status status="PASS" starttime="20211202 04:38:32.358" endtime="20211202 04:38:35.008"/>
+</test>
+<kw name="Close Browser" library="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20211202 04:38:35.011" endtime="20211202 04:38:35.573"/>
+</kw>
+<status status="PASS" starttime="20211202 04:38:27.610" endtime="20211202 04:38:35.573"/>
+</suite>
+<status status="PASS" starttime="20211202 04:38:27.595" endtime="20211202 04:38:35.579"/>
+</suite>
+<statistics>
+<total>
+<stat pass="3" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="3" fail="0" skip="0" id="s1" name="Robot Framework">Robot Framework</stat>
+<stat pass="3" fail="0" skip="0" id="s1-s1" name="Home">Robot Framework.Home</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
