@@ -1,107 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 4.1.2 (Python 3.8.10 on linux)" generated="20211202 04:38:27.594" rpa="false" schemaversion="2">
+<robot generator="Robot 4.1.2 (Python 3.8.10 on linux)" generated="20211202 04:57:55.892" rpa="false" schemaversion="2">
 <suite id="s1" name="Robot Framework" source="/home/vilkiida/miniprojekti-ohtu/ohtuminiproject/src/tests/robot_framework">
 <suite id="s1-s1" name="Home" source="/home/vilkiida/miniprojekti-ohtu/ohtuminiproject/src/tests/robot_framework/home.robot">
 <kw name="Open and Configure Browser" library="resource" type="SETUP">
 <kw name="Open Browser" library="SeleniumLibrary">
 <arg>browser=${BROWSER}</arg>
 <doc>Opens a new browser instance to the optional ``url``.</doc>
-<msg timestamp="20211202 04:38:27.707" level="INFO">Opening browser 'chrome' to base url 'None'.</msg>
-<status status="PASS" starttime="20211202 04:38:27.707" endtime="20211202 04:38:28.509"/>
+<msg timestamp="20211202 04:57:56.006" level="INFO">Opening browser 'chrome' to base url 'None'.</msg>
+<status status="PASS" starttime="20211202 04:57:56.006" endtime="20211202 04:57:56.786"/>
 </kw>
 <kw name="Maximize Browser Window" library="SeleniumLibrary">
 <doc>Maximizes current browser window.</doc>
-<status status="PASS" starttime="20211202 04:38:28.509" endtime="20211202 04:38:28.613"/>
+<status status="PASS" starttime="20211202 04:57:56.786" endtime="20211202 04:57:56.914"/>
 </kw>
 <kw name="Set Selenium Speed" library="SeleniumLibrary">
 <arg>${DELAY}</arg>
 <doc>Sets the delay that is waited after each Selenium command.</doc>
-<status status="PASS" starttime="20211202 04:38:28.613" endtime="20211202 04:38:28.613"/>
+<status status="PASS" starttime="20211202 04:57:56.914" endtime="20211202 04:57:56.915"/>
 </kw>
-<status status="PASS" starttime="20211202 04:38:27.707" endtime="20211202 04:38:28.614"/>
+<status status="PASS" starttime="20211202 04:57:56.006" endtime="20211202 04:57:56.915"/>
 </kw>
 <test id="s1-s1-t1" name="Main Page Open">
 <kw name="Go To Main Page" library="resource" type="SETUP">
 <kw name="Go To" library="SeleniumLibrary">
 <arg>${HOME URL}</arg>
 <doc>Navigates the current browser window to the provided ``url``.</doc>
-<msg timestamp="20211202 04:38:28.615" level="INFO">Opening url 'http://localhost:5000'</msg>
-<status status="PASS" starttime="20211202 04:38:28.615" endtime="20211202 04:38:29.171"/>
+<msg timestamp="20211202 04:57:56.916" level="INFO">Opening url 'http://localhost:5000'</msg>
+<status status="PASS" starttime="20211202 04:57:56.916" endtime="20211202 04:57:57.474"/>
 </kw>
-<status status="PASS" starttime="20211202 04:38:28.614" endtime="20211202 04:38:29.171"/>
+<status status="PASS" starttime="20211202 04:57:56.916" endtime="20211202 04:57:57.474"/>
 </kw>
 <kw name="Main Page Should Be Open" library="resource">
 <kw name="Title Should Be" library="SeleniumLibrary">
 <arg>Lukuvinkki</arg>
 <doc>Verifies that the current page title equals ``title``.</doc>
-<msg timestamp="20211202 04:38:29.687" level="INFO">Page title is 'Lukuvinkki'.</msg>
-<status status="PASS" starttime="20211202 04:38:29.173" endtime="20211202 04:38:29.688"/>
+<msg timestamp="20211202 04:57:57.990" level="INFO">Page title is 'Lukuvinkki'.</msg>
+<status status="PASS" starttime="20211202 04:57:57.476" endtime="20211202 04:57:57.991"/>
 </kw>
-<status status="PASS" starttime="20211202 04:38:29.172" endtime="20211202 04:38:29.689"/>
+<status status="PASS" starttime="20211202 04:57:57.475" endtime="20211202 04:57:57.991"/>
 </kw>
-<status status="PASS" starttime="20211202 04:38:28.614" endtime="20211202 04:38:29.689"/>
+<status status="PASS" starttime="20211202 04:57:56.915" endtime="20211202 04:57:57.992"/>
 </test>
 <test id="s1-s1-t2" name="Click Add Lukuvinkki Link">
 <kw name="Go To Main Page" library="resource" type="SETUP">
 <kw name="Go To" library="SeleniumLibrary">
 <arg>${HOME URL}</arg>
 <doc>Navigates the current browser window to the provided ``url``.</doc>
-<msg timestamp="20211202 04:38:29.692" level="INFO">Opening url 'http://localhost:5000'</msg>
-<status status="PASS" starttime="20211202 04:38:29.692" endtime="20211202 04:38:30.223"/>
+<msg timestamp="20211202 04:57:57.996" level="INFO">Opening url 'http://localhost:5000'</msg>
+<status status="PASS" starttime="20211202 04:57:57.996" endtime="20211202 04:57:58.526"/>
 </kw>
-<status status="PASS" starttime="20211202 04:38:29.691" endtime="20211202 04:38:30.224"/>
+<status status="PASS" starttime="20211202 04:57:57.995" endtime="20211202 04:57:58.527"/>
 </kw>
 <kw name="Click Link" library="SeleniumLibrary">
 <arg>Add lukuvinkki</arg>
 <doc>Clicks a link identified by ``locator``.</doc>
-<msg timestamp="20211202 04:38:30.225" level="INFO">Clicking link 'Add lukuvinkki'.</msg>
-<status status="PASS" starttime="20211202 04:38:30.224" endtime="20211202 04:38:31.840"/>
+<msg timestamp="20211202 04:57:58.530" level="INFO">Clicking link 'Add lukuvinkki'.</msg>
+<status status="PASS" starttime="20211202 04:57:58.528" endtime="20211202 04:58:00.140"/>
 </kw>
 <kw name="Add Lukuvinkki Page Should Be Open" library="resource">
 <kw name="Title Should Be" library="SeleniumLibrary">
 <arg>Lukuvinkki-Add</arg>
 <doc>Verifies that the current page title equals ``title``.</doc>
-<msg timestamp="20211202 04:38:32.354" level="INFO">Page title is 'Lukuvinkki-Add'.</msg>
-<status status="PASS" starttime="20211202 04:38:31.843" endtime="20211202 04:38:32.355"/>
+<msg timestamp="20211202 04:58:00.654" level="INFO">Page title is 'Lukuvinkki-Add'.</msg>
+<status status="PASS" starttime="20211202 04:58:00.142" endtime="20211202 04:58:00.655"/>
 </kw>
-<status status="PASS" starttime="20211202 04:38:31.841" endtime="20211202 04:38:32.356"/>
+<status status="PASS" starttime="20211202 04:58:00.141" endtime="20211202 04:58:00.655"/>
 </kw>
-<status status="PASS" starttime="20211202 04:38:29.691" endtime="20211202 04:38:32.356"/>
+<status status="PASS" starttime="20211202 04:57:57.994" endtime="20211202 04:58:00.656"/>
 </test>
 <test id="s1-s1-t3" name="Click View All Lukuvinkkis Link">
 <kw name="Go To Main Page" library="resource" type="SETUP">
 <kw name="Go To" library="SeleniumLibrary">
 <arg>${HOME URL}</arg>
 <doc>Navigates the current browser window to the provided ``url``.</doc>
-<msg timestamp="20211202 04:38:32.359" level="INFO">Opening url 'http://localhost:5000'</msg>
-<status status="PASS" starttime="20211202 04:38:32.359" endtime="20211202 04:38:32.888"/>
+<msg timestamp="20211202 04:58:00.660" level="INFO">Opening url 'http://localhost:5000'</msg>
+<status status="PASS" starttime="20211202 04:58:00.659" endtime="20211202 04:58:01.191"/>
 </kw>
-<status status="PASS" starttime="20211202 04:38:32.359" endtime="20211202 04:38:32.889"/>
+<status status="PASS" starttime="20211202 04:58:00.659" endtime="20211202 04:58:01.192"/>
 </kw>
 <kw name="Click Link" library="SeleniumLibrary">
 <arg>View all lukuvinkkis</arg>
 <doc>Clicks a link identified by ``locator``.</doc>
-<msg timestamp="20211202 04:38:32.890" level="INFO">Clicking link 'View all lukuvinkkis'.</msg>
-<status status="PASS" starttime="20211202 04:38:32.889" endtime="20211202 04:38:34.488"/>
+<msg timestamp="20211202 04:58:01.193" level="INFO">Clicking link 'View all lukuvinkkis'.</msg>
+<status status="PASS" starttime="20211202 04:58:01.192" endtime="20211202 04:58:02.783"/>
 </kw>
 <kw name="Lukuvinkkiview Page Should Be Open" library="resource">
 <kw name="Title Should Be" library="SeleniumLibrary">
 <arg>Lukuvinkki-View</arg>
 <doc>Verifies that the current page title equals ``title``.</doc>
-<msg timestamp="20211202 04:38:35.006" level="INFO">Page title is 'Lukuvinkki-View'.</msg>
-<status status="PASS" starttime="20211202 04:38:34.490" endtime="20211202 04:38:35.006"/>
+<msg timestamp="20211202 04:58:03.297" level="INFO">Page title is 'Lukuvinkki-View'.</msg>
+<status status="PASS" starttime="20211202 04:58:02.785" endtime="20211202 04:58:03.298"/>
 </kw>
-<status status="PASS" starttime="20211202 04:38:34.489" endtime="20211202 04:38:35.007"/>
+<status status="PASS" starttime="20211202 04:58:02.784" endtime="20211202 04:58:03.299"/>
 </kw>
-<status status="PASS" starttime="20211202 04:38:32.358" endtime="20211202 04:38:35.008"/>
+<status status="PASS" starttime="20211202 04:58:00.657" endtime="20211202 04:58:03.299"/>
 </test>
 <kw name="Close Browser" library="SeleniumLibrary" type="TEARDOWN">
 <doc>Closes the current browser.</doc>
-<status status="PASS" starttime="20211202 04:38:35.011" endtime="20211202 04:38:35.573"/>
+<status status="PASS" starttime="20211202 04:58:03.302" endtime="20211202 04:58:03.864"/>
 </kw>
-<status status="PASS" starttime="20211202 04:38:27.610" endtime="20211202 04:38:35.573"/>
+<status status="PASS" starttime="20211202 04:57:55.908" endtime="20211202 04:58:03.864"/>
 </suite>
-<status status="PASS" starttime="20211202 04:38:27.595" endtime="20211202 04:38:35.579"/>
+<status status="PASS" starttime="20211202 04:57:55.893" endtime="20211202 04:58:03.871"/>
 </suite>
 <statistics>
 <total>
