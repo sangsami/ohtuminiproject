@@ -5,7 +5,7 @@ Library  SeleniumLibrary
 *** Variables ***
 ${SERVER}  localhost:5000
 ${BROWSER}  chrome
-${DELAY}  0.5 seconds
+${DELAY}  0.2 seconds
 ${HOME URL}  http://${SERVER}
 ${ADDLUKUVINKKI URL}  http://${SERVER}/addlukuvinkki
 ${LUKUVINKKIVIEW URL}  http://${SERVER}/lukuvinkkiview
