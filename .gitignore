@@ -4,3 +4,9 @@ __pycache__
 .coverage
 htmlcov
 .DS_Store
+
+### robotframework ###
+log.html
+output.xml
+report.html
+selenium-screenshot-*.png
