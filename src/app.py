@@ -1,7 +1,17 @@
 from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+import fixforheroku
 
 app = Flask(__name__)
 app.secret_key = "this_will_need_to_be_changed_in_production"
+
+print(fixforheroku.uri)
+
+#app.config["SQLALCHEMY_DATABASE_URI"] = fixforheroku.uri 
+#app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
+
+#db = SQLAlchemy(app)
 
 # pylint: disable=wrong-import-position
 # pylint: disable=unused-import

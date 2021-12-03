@@ -12,6 +12,11 @@ from services.lukuvinkki_service import (
     LukuvinkkiTitleOrAuthor
 )
 
+import fixforheroku
+
+@app.route("/testenv")
+def test_env():
+    return str(len(fixforheroku.uri))
 
 @app.route("/")
 def render_home():
