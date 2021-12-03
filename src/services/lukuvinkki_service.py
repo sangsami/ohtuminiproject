@@ -27,6 +27,9 @@ class LukuvinkkiService:
 
     def get_lukuvinkkis(self):
         return self._lukuvinkki_repository.find_all()
+    
+    def example_db_ops(self):
+        self._lukuvinkki_repository.example_db_ops()
 
 
 lukuvinkki_service = LukuvinkkiService()
