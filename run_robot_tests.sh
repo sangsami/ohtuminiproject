@@ -1,8 +1,10 @@
 #!/bin/bash
 
-# käynnistetään Flask-palvelin taustalle (huomaa & komennon lopussa)
-export DISPLAY=:1
+/usr/bin/Xvfb :0 -screen 0 1024x768x24&
 
+export DISPLAY=:0
+
+# käynnistetään Flask-palvelin taustalle (huomaa & komennon lopussa)
 cd src
 poetry run flask run &
 
