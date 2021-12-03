@@ -1,6 +1,8 @@
 #!/bin/bash
 
 # käynnistetään Flask-palvelin taustalle (huomaa & komennon lopussa)
+export DISPLAY=:1
+
 cd src
 poetry run flask run &
 
