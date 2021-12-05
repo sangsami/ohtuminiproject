@@ -3,14 +3,11 @@ from repositories.lukuvinkki_repository import (
     lukuvinkki_repository as default_lukuvinkki_repository
     )
 
-
 class LukuvinkkiExistsError(Exception):
     pass
 
-
 class LukuvinkkiTitleOrAuthor(Exception):
     pass
-
 
 class LukuvinkkiService:
     def __init__(self, lukuvinkki_repository=default_lukuvinkki_repository):
@@ -27,9 +24,8 @@ class LukuvinkkiService:
 
     def get_lukuvinkkis(self):
         return self._lukuvinkki_repository.find_all()
-    
+
     def example_db_ops(self):
         self._lukuvinkki_repository.example_db_ops()
-
 
 lukuvinkki_service = LukuvinkkiService()

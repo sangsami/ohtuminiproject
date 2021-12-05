@@ -1,7 +1,6 @@
 from entities.lukuvinkki import Lukuvinkki  # pylint: disable=unused-import
 from app import db
 
-
 class LukuvinkkiRepository:
     def __init__(self):
         self._lukuvinkkis = []
