@@ -32,7 +32,9 @@ def render_addlukuvinkki():
 
 @app.route("/addlukuvinkki", methods=["POST"])
 def handle_addlukuvinkki():
-    handle_call = "/addlukuvinkki"
+    if "view_button" in request.form:
+        return redirect("/lukuvinkkiview")
+
     if "save_button" in request.form:
         title = request.form.get("title")
         author = request.form.get("author")
@@ -47,9 +49,7 @@ def handle_addlukuvinkki():
         except (LukuvinkkiTitleOrAuthor, LukuvinkkiExistsError) as error:
             flash(str(error))
 
-    elif "view_button" in request.form:
-        handle_call = "/lukuvinkkiview"
-    return redirect(handle_call)
+    return redirect("/addlukuvinkki")
 
 
 @app.route("/lukuvinkkiview")
@@ -64,7 +64,7 @@ def ping():
     return "Pong"
 
 
-@app.route("/tests/reset", methods = ["POST"])
+@app.route("/tests/reset", methods=["POST"])
 def reset_tests():
     lukuvinkki_repository.delete_all()
     return "Reset"
