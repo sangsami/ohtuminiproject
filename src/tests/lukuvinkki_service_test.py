@@ -1,5 +1,5 @@
 import unittest
-# from app import db
+from app import db # pylint: disable=unused-import
 from services.lukuvinkki_service import (
     LukuvinkkiService, LukuvinkkiExistsError, LukuvinkkiTitleOrAuthor
 )
