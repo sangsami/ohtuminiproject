@@ -16,3 +16,7 @@ db = SQLAlchemy(app)
 import routes
 # pylint: enable=unused-import
 # pylint: enable=wrong-import-position
+
+# Blueprint for auth routes
+from auth.auth import auth as auth_blueprint
+app.register_blueprint(auth_blueprint)
