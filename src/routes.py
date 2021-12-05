@@ -12,7 +12,6 @@ from services.lukuvinkki_service import (
     LukuvinkkiTitleOrAuthor
 )
 
-from db import db
 
 #This route is just for demonstrating the usage of the db in this code:
 @app.route("/example_db_ops")

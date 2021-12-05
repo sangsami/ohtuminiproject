@@ -1,5 +1,5 @@
 from entities.lukuvinkki import Lukuvinkki  # pylint: disable=unused-import
-from db import db
+from app import db
 
 
 class LukuvinkkiRepository:

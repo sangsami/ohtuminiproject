@@ -1,4 +1,5 @@
 import unittest
+from app import db
 from services.lukuvinkki_service import (
     LukuvinkkiService, LukuvinkkiExistsError, LukuvinkkiTitleOrAuthor
 )
