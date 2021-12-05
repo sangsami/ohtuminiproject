@@ -1,5 +1,5 @@
 from app import db
-
+# pylint: disable=no-member
 
 class User(db.Model):
     __tablename__ = 'users'

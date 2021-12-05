@@ -1,11 +1,12 @@
 from flask import (
-    Blueprint, 
-    render_template, 
-    url_for, 
-    redirect, 
+    Blueprint,
+    render_template,
+    url_for,
+    redirect,
     request,
     flash
 )
+
 from models.user import User
 # import database, db
 
@@ -17,11 +18,12 @@ def login():
 
 @auth.route('/login', methods=['POST'])
 def login_post():
+
     username = request.form.get('username')
-    password = request.form.get('password')
+    password = request.form.get('password') # pylint: disable=unused-variable
 
     user = User.query.filter_by(username=username).first()
-    
+
     # tässä tarkistetaan myös salasanan hash, kunhan register on tehty
     # if not user or not check_password_hash(user.password, password)
     if not user:
