@@ -56,13 +56,11 @@ def login_post():
 
     user = User.query.filter_by(username=username).first()
 
-    # tässä tarkistetaan myös salasanan hash, kunhan register on tehty
-    # if not user or not check_password_hash(user.password, password)
     if not user or not check_password_hash(user.password, password):
         flash('Invalid username or password')
         return redirect(url_for('auth.login'))
 
-    return redirect(url_for('render_home'))
+    return redirect(url_for('render_lukuvinkkiview'))
 
 @auth.route('/logout')
 def logout():
