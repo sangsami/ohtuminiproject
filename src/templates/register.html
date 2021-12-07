@@ -1,46 +1,20 @@
 {% extends "layout.html" %}
 
 {% block title %}
-Login
+Register
 {% endblock %}
 
 {% block body %}
-<h1>Login</h1>
+<h1>Register</h1>
 
-<form action="/register" method="post">
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <ul>
-                {% for message in messages %}
-                    <li>{{ message }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-    {% endwith %}
-    
-    <div>
-        <label for="username">Username</label>
-        <input type="text" name="username" id="username">
-    </div>
-
-    <div>
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password">
-    </div>
-
-    <div>
-        <label for="password_confirmation">Password confirmation</label>
-        <input type="password" name="password_confirmation" id="password_confirmation">
-    </div>
-
-    <button>
-        Register
-    </button>
-
-    <!-- placeholder for registerbutton -->
-    <div>
-        <a href="/login">Login</a>
-    </div>
-
+{% from "_formhelpers.html" import render_field %}
+<form method=post>
+  <dl>
+    {{ render_field(form.username) }}
+    {{ render_field(form.password) }}
+    {{ render_field(form.password_confirmation) }}
+  </dl>
+  <p><input type=submit value=Register>
 </form>
+
 {% endblock %}
