@@ -43,6 +43,8 @@ jobs:
         run: bash <(curl -s https://codecov.io/bash)
       - name: build db
         run: poetry run python3 src/db_init.py
+        env:
+          DATABASE_URL: postgres://postgres:postgres@localhost:${{ job.services.postgres.ports[5432] }}/postgres
 #      - name: Lint
 #        run: poetry run pylint src
 #        env:
