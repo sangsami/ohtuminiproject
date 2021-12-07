@@ -41,6 +41,8 @@ jobs:
         run: poetry run coverage xml
       - name: Coverage report to Codecov
         run: bash <(curl -s https://codecov.io/bash)
+      - name: build db
+        run: poetry run python3 src/db_init.py
 #      - name: Lint
 #        run: poetry run pylint src
 #        env:
