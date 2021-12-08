@@ -1,8 +1,9 @@
 *** Settings ***
 Resource  resource.robot
-Suite Setup  Run Keywords  Open and Configure Browser  Login
+Suite Setup  Open and Configure Browser
 Suite Teardown  Close Browser
-Test Setup  Go To Main Page
+Test Setup  Run Keywords  Login  Go To Main Page
+Test Teardown  Go to Logout Page
 
 *** Test Cases ***
 Main Page Open

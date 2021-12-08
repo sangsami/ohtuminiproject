@@ -9,8 +9,8 @@ from flask import (
 from flask_login import login_user, logout_user
 from auth.forms import RegistrationForm
 from models.user import User
-
 from app import db
+
 from repositories.user_repository import UserRepository
 from services.user_service import UserService
 
