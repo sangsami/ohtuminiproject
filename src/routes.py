@@ -59,7 +59,6 @@ def render_lukuvinkkiview():
 
 
 @app.route("/ping")
-@login_required
 def ping():
     return "Pong"
 
