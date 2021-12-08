@@ -1,7 +1,10 @@
 from wtforms import Form, StringField, PasswordField, validators, ValidationError
-from services.user_service import user_service
 
 class RegistrationForm(Form):
+    def __init__(self, form, user_service):
+        super().__init__(form)
+        self._user_service = user_service
+
     username = StringField('Username', [
         validators.Length(min=4, message='Username needs to be 4 characters long or longer'),
         validators.DataRequired(message='Username is required'),
@@ -9,7 +12,7 @@ class RegistrationForm(Form):
     ])
 
     def validate_username(self, field):
-        if not user_service.check_if_unique_username(field.data):
+        if not self._user_service.check_if_unique_username(field.data):
             self.username.errors += (ValidationError('Username already in use'),)
 
     password = PasswordField('Password', [

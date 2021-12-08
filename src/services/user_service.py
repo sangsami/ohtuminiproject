@@ -1,12 +1,9 @@
 from werkzeug.security import generate_password_hash, check_password_hash
-from models.user import User
-from repositories.user_repository import (
-    user_repository as default_user_repository
-    )
 
 class UserService:
-    def __init__(self, user_repository=default_user_repository):
+    def __init__(self, user_repository, user_model):
         self._user_repository = user_repository
+        self._user_model = user_model
 
     def check_credentials(self, username, password):
         user = self._user_repository.find_by_username(username)
@@ -18,7 +15,9 @@ class UserService:
 
     def create_user(self, username, password):
         user = self._user_repository.create(
-            User(username=username, password=generate_password_hash(password, method='sha256'))
+            self._user_model(
+                username=username,
+                password=generate_password_hash(password, method='sha256'))
         )
 
         return user
@@ -27,5 +26,3 @@ class UserService:
         if self._user_repository.find_by_username(username):
             return False
         return True
-
-user_service = UserService()
