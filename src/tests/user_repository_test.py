@@ -8,8 +8,8 @@ class TestUserRepository(unittest.TestCase):
         self.db_mock = Mock()
 
         self.results = [
-            User(username='matti', password='sha256asdasd'),
-            User(username='testaaja', password='sha256qwerty')
+            User('matti', 'sha256asdasd'),
+            User('testaaja', 'sha256qwerty')
         ]
 
         self.db_mock.session.query().all.return_value = self.results

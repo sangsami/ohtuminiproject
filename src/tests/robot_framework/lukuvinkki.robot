@@ -1,8 +1,9 @@
 *** Settings ***
 Resource  resource.robot
-Suite Setup  Run Keywords  Open and Configure Browser  Login
+Suite Setup  Open and Configure Browser
 Suite Teardown  Close Browser
-Test Setup  Go To Add Lukuvinkki Page
+Test Setup  Run Keywords  Login  Go To Add Lukuvinkki Page
+Test Teardown  Go To Logout Page
 
 *** Test Cases ***
 Add Lukuvinkki With Title And Author
