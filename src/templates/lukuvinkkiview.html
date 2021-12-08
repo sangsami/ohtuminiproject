@@ -7,25 +7,29 @@ Lukuvinkki-View
 {% block body %}
 <h1>All lukuvinkkis: </h1>
 <hr>
-{% for lukuvinkki in all_lukuvinkki %}
-    <b>Title:</b> {{ lukuvinkki.title() }}<br>
+{% if all_lukuvinkki %}
+    {% for lukuvinkki in all_lukuvinkki %}
+        <b>Title:</b> {{ lukuvinkki.title() }}<br>
 
-    <b>Author:</b> {{ lukuvinkki.author() }}<br>
+        <b>Author:</b> {{ lukuvinkki.author() }}<br>
 
-    {% if lukuvinkki.link() %}
-        <b>Link:</b> {{ lukuvinkki.link() }}<br>
-    {% endif %}
+        {% if lukuvinkki.link() %}
+            <b>Link:</b> {{ lukuvinkki.link() }}<br>
+        {% endif %}
 
-    {% if lukuvinkki.description() %}
-        <b>Description:</b> {{ lukuvinkki.description() }}<br>
-    {% endif %}
+        {% if lukuvinkki.description() %}
+            <b>Description:</b> {{ lukuvinkki.description() }}<br>
+        {% endif %}
 
-    {% if lukuvinkki.comment() %}
-        <b>Comment:</b> {{ lukuvinkki.comment() }}
-    {% endif %}
+        {% if lukuvinkki.comment() %}
+            <b>Comment:</b> {{ lukuvinkki.comment() }}
+        {% endif %}
 
-    <hr>
+        <hr>
+        {% endfor %}
+
+{% endif %}
     
-{% endfor %}
+
 
 {% endblock %}
