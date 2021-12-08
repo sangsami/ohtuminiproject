@@ -45,10 +45,10 @@ jobs:
         run: poetry run python3 src/db_init.py
         env:
           DATABASE_URL: postgres://postgres:postgres@localhost:${{ job.services.postgres.ports[5432] }}/postgres
-#      - name: Lint
-#        run: poetry run pylint src
-#        env:
-#          DATABASE_URL: postgres://postgres:postgres@localhost:${{ job.services.postgres.ports[5432] }}/postgres
+      - name: Lint
+        run: poetry run pylint src
+        env:
+          DATABASE_URL: postgres://postgres:postgres@localhost:${{ job.services.postgres.ports[5432] }}/postgres
       - name: Run robot tests
         run: bash run_robot_tests.sh
         env:
