@@ -13,6 +13,9 @@ class UserService:
 
         return user
 
+    def get_user(self, user_id):
+        return self._user_repository.find_by_id(user_id)
+
     def create_user(self, username, password):
         user = self._user_repository.create(
             self._user_model(

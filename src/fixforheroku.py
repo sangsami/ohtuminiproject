@@ -1,9 +1,6 @@
-import os
-from dotenv import load_dotenv
+from config import DB_URI
 
-load_dotenv()
-
-uri = os.getenv("DATABASE_URL")
+uri = DB_URI
 if uri.startswith("postgres://"):
     uri = uri.replace("postgres://", "postgresql://", 1)
 # rest of connection code using the connection string `uri`

@@ -9,6 +9,9 @@ class UserRepository:
     def find_by_username(self, username):
         return self._db.session.query(self._user_model).filter_by(username=username).first()
 
+    def find_by_id(self, user_id):
+        return self._db.session.query(self._user_model).filter_by(id=user_id).first()
+
     def create(self, user):
         existing_user = self.find_by_username(user.username)
 

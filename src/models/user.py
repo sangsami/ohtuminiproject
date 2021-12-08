@@ -1,5 +1,6 @@
 # from app import db
 # # pylint: disable=no-member
+from flask_login import UserMixin
 from sqlalchemy import (
     Column,
     Integer,
@@ -11,7 +12,7 @@ from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
 
-class User(Base):
+class User(UserMixin, Base):
     __tablename__ = 'users'
 
     id = Column(Integer, primary_key=True)
