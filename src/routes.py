@@ -4,6 +4,7 @@ from flask import (
     redirect,
     flash
 )
+from flask_login import login_required
 from app import app
 from repositories.lukuvinkki_repository import lukuvinkki_repository
 from services.lukuvinkki_service import (
@@ -11,7 +12,6 @@ from services.lukuvinkki_service import (
     LukuvinkkiExistsError,
     LukuvinkkiTitleOrAuthor
 )
-
 
 #This route is just for demonstrating the usage of the db in this code:
 @app.route("/example_db_ops")
@@ -23,13 +23,13 @@ def example_db_ops():
 def render_home():
     return render_template("index.html")
 
-
 @app.route("/addlukuvinkki", methods=["GET"])
+@login_required
 def render_addlukuvinkki():
     return render_template("addlukuvinkki.html")
 
-
 @app.route("/addlukuvinkki", methods=["POST"])
+@login_required
 def handle_addlukuvinkki():
     handle_call = "/addlukuvinkki"
     if "save_button" in request.form:
@@ -50,8 +50,8 @@ def handle_addlukuvinkki():
         handle_call = "/lukuvinkkiview"
     return redirect(handle_call)
 
-
 @app.route("/lukuvinkkiview")
+@login_required
 def render_lukuvinkkiview():
     all_lukuvinkki = lukuvinkki_service.get_lukuvinkkis()
     return render_template(
@@ -59,6 +59,7 @@ def render_lukuvinkkiview():
 
 
 @app.route("/ping")
+@login_required
 def ping():
     return "Pong"
 
