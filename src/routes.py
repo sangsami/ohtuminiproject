@@ -10,7 +10,7 @@ from repositories.lukuvinkki_repository import lukuvinkki_repository
 from services.lukuvinkki_service import (
     lukuvinkki_service,
     LukuvinkkiExistsError,
-    LukuvinkkiTitleOrAuthor
+    LukuvinkkiTitle
 )
 
 #This route is just for demonstrating the usage of the db in this code:
@@ -36,7 +36,9 @@ def handle_choosetype():
 
 @app.route("/addlukuvinkki")
 @login_required
-def render_addlukuvinkki(type):
+def render_addlukuvinkki(type=None):
+    if type is None:
+        type = "Book"
     return render_template("addlukuvinkki.html", type=type)
 
 @app.route("/addlukuvinkki", methods=["POST"])
@@ -56,16 +58,20 @@ def handle_addlukuvinkki():
             lukuvinkki_service.create_lukuvinkki(
                 title, author, link, description, comment, type)
             flash("The lukuvinkki was saved.")
-        except (LukuvinkkiTitleOrAuthor, LukuvinkkiExistsError) as error:
+        except (LukuvinkkiTitle, LukuvinkkiExistsError) as error:
             flash(str(error))
-        return redirect("/addlukuvinkki")
+        return render_template("addlukuvinkki.html", type=type)
 
 @app.route("/lukuvinkkiview", methods=["GET"])
 @login_required
 def render_lukuvinkkiview():
-    all_lukuvinkki = lukuvinkki_service.get_lukuvinkkis()
+    books = lukuvinkki_service.get_books()
+    blog_posts = lukuvinkki_service.get_blog_posts()
+    podcasts = lukuvinkki_service.get_podcasts()
+    youtubes = lukuvinkki_service.get_youtubes()
     return render_template(
-        "lukuvinkkiview.html", all_lukuvinkki=all_lukuvinkki)
+        "lukuvinkkiview.html", books=books, blog_posts=blog_posts,
+        podcasts=podcasts, youtubes=youtubes)
 
 @app.route("/lukuvinkkiview", methods=["POST"])
 @login_required

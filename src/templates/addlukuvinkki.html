@@ -10,9 +10,16 @@ Lukuvinkki-Add
 <h2>Lukuvinkki type: {{ type }}</h2>
 
 <form action="/addlukuvinkki" method="POST">
-  <input type="hidden" name="type" id="type" value=type/>
-
-
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul>
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+  <input type="hidden" name="type" id="type" value="{{ type }}"">
   <div>
     <label for="title">Title</label><br />
     <input type="text" name="title" id="title" />

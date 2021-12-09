@@ -32,6 +32,7 @@ class Lukuvinkki(db.Model):
         self.descript = description
         self.link = link
         self.comment = comment
+        self.current_type = type
 
     def read_status(self):
         return "Read" if self.is_read else "Not read"
