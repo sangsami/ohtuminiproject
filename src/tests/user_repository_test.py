@@ -1,5 +1,6 @@
 import unittest
 from unittest.mock import Mock
+from app import db
 from models.user import User
 from repositories.user_repository import UserRepository
 
