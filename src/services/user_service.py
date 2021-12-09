@@ -19,8 +19,8 @@ class UserService:
     def create_user(self, username, password):
         user = self._user_repository.create(
             self._user_model(
-                username=username,
-                password=generate_password_hash(password, method='sha256'))
+                username,
+                generate_password_hash(password, method='sha256'))
         )
 
         return user
