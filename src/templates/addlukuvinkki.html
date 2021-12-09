@@ -7,40 +7,30 @@ Lukuvinkki-Add
 
 {% block body %}
 <h1>Add a lukuvinkki</h1>
+<h2>Lukuvinkki type: {{ type }}</h2>
 
 <form action="/addlukuvinkki" method="POST">
-  {% with messages = get_flashed_messages() %}
-    {% if messages %}
-      <ul>
-      {% for message in messages %}
-        <li>{{ message }}</li>
-      {% endfor %}
-      </ul>
-    {% endif %}
-  {% endwith %}
+  <input type="hidden" name="type" id="type" value=type/>
 
-  <div>
-    <input type="radio" name="type" id="book" value="Book" checked/>
-    <label for="book">Book</label>
-    <input type="radio" name="type" id="blog_post" value="Blog post"/>
-    <label for="blog_post">Blog post</label>
-    <input type="radio" name="type" id="podcast" value="Podcast"/>
-    <label for="podcast">Podcast</label>
-    <input type="radio" name="type" id="video" value="Youtube"/>
-    <label for="video">Video</label>
-    <br/>
-   
-  </div>
 
   <div>
     <label for="title">Title</label><br />
     <input type="text" name="title" id="title" />
   </div>
 
-  <div>
-  <label for="author">Author</label><br />
-  <input type="text" name="author" id="author" />
-  </div>
+  {% if "Youtube" not in type %}
+    <div>
+    <label for="author">Author</label><br />
+    <input type="text" name="author" id="author" />
+    </div>
+  {% endif %}
+
+  {% if "Book" in type %}
+    <div>
+    <label for="ISBN">ISBN</label><br />
+    <input type="text" name="ISBN" id="ISBN" />
+    </div>
+  {% endif %}
 
   <div>
     <label for="link">Link</label><br />

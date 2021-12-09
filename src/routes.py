@@ -23,10 +23,21 @@ def example_db_ops():
 def render_home():
     return render_template("index.html")
 
-@app.route("/addlukuvinkki", methods=["GET"])
+@app.route("/choosetype")
 @login_required
-def render_addlukuvinkki():
-    return render_template("addlukuvinkki.html")
+def render_choosetype():
+    return render_template("choosetype.html")
+
+@app.route("/choosetype", methods=["POST"])
+@login_required
+def handle_choosetype():
+    type = request.form["type"]
+    return render_addlukuvinkki(type)
+
+@app.route("/addlukuvinkki")
+@login_required
+def render_addlukuvinkki(type):
+    return render_template("addlukuvinkki.html", type=type)
 
 @app.route("/addlukuvinkki", methods=["POST"])
 @login_required
