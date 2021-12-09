@@ -6,11 +6,19 @@ Lukuvinkki
 
 {% block body %}
 <h1>Lukuvinkki app</h1>
-
+<hr>
+<a href="/logout">Logout</a></li>
+<hr>
+{% if current_user.is_authenticated %}
+You are currently logged in as <b>{{ name }}</b>
+{% endif %}
 <ul>
-    <li><a href="/login">Login</a></li>
-    <li><a href="/register">Register</a></li>
-    <li><a href="/choosetype">Add lukuvinkki</a></li>
+    {% if current_user.is_authenticated %}
+    <li><a href="/choosetype">Add a new lukuvinkki</a></li>
     <li><a href="/lukuvinkkiview">View all lukuvinkkis</a></li>
+    {% else %}
+    <li><a href="/register">Register</a></li>
+    <li><a href="/login">Login</a></li>
+    {% endif %}
 </ul>
 {% endblock %}

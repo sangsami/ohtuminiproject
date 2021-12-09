@@ -7,6 +7,8 @@ Login
 {% block body %}
 <h1>Login</h1>
 
+<p>Please Log in. If you dont have an account already, click register.
+
 <form action="/login" method="post">
     {% with messages = get_flashed_messages() %}
         {% if messages %}
@@ -27,14 +29,15 @@ Login
         <label for="password">Password</label>
         <input type="password" name="password" id="password">
     </div>
-
+    <p>
     <button>
         Login
     </button>
 
     <!-- placeholder for registerbutton -->
+    <p>
     <div>
-        <a href="#">Register</a>
+        <a href="/register">Register here</a>
     </div>
 
 </form>

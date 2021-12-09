@@ -7,6 +7,10 @@ Lukuvinkki-View
 {% block body %}
 <h1>All lukuvinkkis: </h1>
 <hr>
+<a href="/">Go to main page</a>&nbsp;
+<a href="/choosetype">Add a new lukuvinkki</a></li>&nbsp;
+<a href="/logout">Logout</a></li>
+<hr>
 {% if books %}
     <h2>Books: </h2>
     {% for book in books %}

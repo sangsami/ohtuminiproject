@@ -4,7 +4,7 @@ from flask import (
     redirect,
     flash
 )
-from flask_login import login_required
+from flask_login import login_required, current_user
 from app import app
 from repositories.lukuvinkki_repository import lukuvinkki_repository
 from services.lukuvinkki_service import (
@@ -21,7 +21,9 @@ def example_db_ops():
 
 @app.route("/")
 def render_home():
-    return render_template("index.html")
+    if current_user.is_authenticated:
+        return render_template("index.html", name=current_user.username)
+    return redirect("/login")
 
 @app.route("/choosetype")
 @login_required
