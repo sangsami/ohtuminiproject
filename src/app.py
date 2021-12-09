@@ -34,6 +34,11 @@ def load_user(user_id):
 import routes
 # pylint: enable=unused-import
 
+# pylint: disable=wrong-import-position
+# pylint: disable=unused-import
+import db_init
+# pylint: enable=unused-import
+
 
 # Blueprint for auth routes
 from auth.auth import auth as auth_blueprint
