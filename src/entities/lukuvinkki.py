@@ -7,10 +7,11 @@ class Lukuvinkki(db.Model):
     current_type = db.Column(db.String(10), nullable = False)
     title = db.Column(db.String(100), nullable = False)
     author = db.Column(db.String(100), nullable = True)
-    is_read = db.Column(db.Boolean, nullable = False)
+    is_read = db.Column(db.Boolean, nullable = False, default = False)
     link = db.Column(db.String(120), nullable = True)
     descript = db.Column(db.String(500), nullable = True)
     comment = db.Column(db.String(500), nullable = True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
     def __init__(
             self,
@@ -41,4 +42,4 @@ class Lukuvinkki(db.Model):
         self.is_read = not self.is_read
 
     def __str__(self):
-        return f"{self._title} {self._author}"
+        return f"{self.current_type}: {self.title}"

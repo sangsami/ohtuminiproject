@@ -32,7 +32,15 @@ def render_choosetype():
 @login_required
 def handle_choosetype():
     type = request.form["type"]
-    return render_addlukuvinkki(type)
+    return render_addlukuvinkki(type=type)
+
+@app.route("/changetype", methods=["POST"])
+@login_required
+def handle_changetype():
+    type = request.form["type"]
+    lukuvinkki_id = request.form["lukuvinkki"]
+    lukuvinkki = lukuvinkki_repository.get_lukuvinkki(lukuvinkki_id)
+    return render_template("/changelukuvinkki.html", type=type, lukuvinkki=lukuvinkki)
 
 @app.route("/addlukuvinkki")
 @login_required
@@ -62,6 +70,28 @@ def handle_addlukuvinkki():
             flash(str(error))
         return render_template("addlukuvinkki.html", type=type)
 
+@app.route("/changelukuvinkki", methods=["POST"])
+@login_required
+def handle_changelukuvinkki():
+    if "view_button" in request.form:
+        return render_lukuvinkkiview()
+    else:
+        id = request.form("id")
+        type = request.form["type"]
+        title = request.form.get("title")
+        author = request.form.get("author")
+        description = request.form.get("description")
+        link = request.form.get("link")
+        comment = request.form.get("comment")
+
+        try:
+            lukuvinkki_service.change_lukuvinkki(
+                id, title, author, link, description, comment, type)
+            flash("The lukuvinkki was saved.")
+        except (LukuvinkkiTitle, LukuvinkkiExistsError) as error:
+            flash(str(error))
+        return render_template("addlukuvinkki.html", type=type)
+
 @app.route("/lukuvinkkiview", methods=["GET"])
 @login_required
 def render_lukuvinkkiview():
@@ -80,6 +110,10 @@ def handle_lukuvinkkiview():
         id = request.form.get("lukuvinkki_id")
         lukuvinkki_service.change_lukuvinkki_status(id)
         return redirect("/lukuvinkkiview")
+    elif "edit_button" in request.form:
+        id = request.form.get("lukuvinkki_id")
+        lukuvinkki = lukuvinkki_repository.get_lukuvinkki(id)
+        return render_template("/changetype.html", lukuvinkki=lukuvinkki)
 
 
 @app.route("/ping")

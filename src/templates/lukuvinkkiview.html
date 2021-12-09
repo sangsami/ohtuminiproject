@@ -11,13 +11,16 @@ Lukuvinkki-View
     <h2>Books: </h2>
     {% for book in books %}
         <b>Title:</b> {{ book.title }}<br>
-
-        <b>Author:</b> {{ book.author }}<br>
+        
+        {% if book.author %}
+            <b>Author:</b> {{ book.author }}<br>
+        {% endif %}
 
         <b>Status:</b> {{ book.read_status() }}<br>
 
         {% if book.link %}
-            <a href="{{ book.link }}"><b>Link</b></a><br>
+            <b>Link: </b>
+            <a href="{{ book.link }}">{{ book.link }}</a><br>
         {% endif %}
 
         {% if book.descript %}
@@ -32,8 +35,11 @@ Lukuvinkki-View
             <input type="submit" name="change_status_button" value="Change status">
             <input type="hidden" value={{ book.id }} name="lukuvinkki_id">
         </form>
+        <form action="/lukuvinkkiview" method="POST">
+            <input type="submit" name="edit_button" value="Edit">
+            <input type="hidden" value={{ book.id }} name="lukuvinkki_id">
+        </form>
         <br>
-
         {% endfor %}
         <hr>
 {% endif %}
@@ -44,12 +50,15 @@ Lukuvinkki-View
 
         <b>Title:</b> {{ blog_post.title }}<br>
 
-        <b>Author:</b> {{ blog_post.author }}<br>
+        {% if blog_post.author %}
+            <b>Author:</b> {{ blog_post.author }}<br>
+        {% endif %}
 
         <b>Status:</b> {{ blog_post.read_status() }}<br>
 
         {% if blog_post.link %}
-                <a href="{{ blog_post.link }}"><b>Link</b></a><br>
+                <b>Link: </b>
+                <a href="{{ blog_post.link }}">{{ blog_post.link }}</a><br>
         {% endif %}
 
         {% if blog_post.descript %}
@@ -64,8 +73,11 @@ Lukuvinkki-View
             <input type="submit" name="change_status_button" value="Change status">
             <input type="hidden" value={{ blog_post.id }} name="lukuvinkki_id">
         </form>
+        <form action="/lukuvinkkiview" method="POST">
+            <input type="submit" name="edit_button" value="Edit">
+            <input type="hidden" value={{ blog_post.id }} name="lukuvinkki_id">
+        </form>
         <br>
-
         {% endfor %}
         <hr>
 {% endif %}
@@ -75,12 +87,15 @@ Lukuvinkki-View
     {% for podcast in podcasts %}
         <b>Title:</b> {{ podcast.title }}<br>
 
-        <b>Author:</b> {{ podcast.author }}<br>
+        {% if podcast.author %}
+            <b>Author:</b> {{ podcast.author }}<br>
+        {% endif %}
 
         <b>Status:</b> {{ podcast.read_status() }}<br>
 
         {% if podcast.link %}
-                <a href="{{ podcast.link }}"><b>Link</b></a><br>
+                <b>Link: </b>
+                <a href="{{ podcast.link }}">{{ podcast.link }}</a><br>
         {% endif %}
 
         {% if podcast.descript %}
@@ -95,8 +110,11 @@ Lukuvinkki-View
             <input type="submit" name="change_status_button" value="Change status">
             <input type="hidden" value={{ podcast.id }} name="lukuvinkki_id">
         </form>
+        <form action="/lukuvinkkiview" method="POST">
+            <input type="submit" name="edit_button" value="Edit">
+            <input type="hidden" value={{ podcast.id }} name="lukuvinkki_id">
+        </form>
         <br>
-
         {% endfor %}
         <hr>
 {% endif %}
@@ -106,12 +124,15 @@ Lukuvinkki-View
     {% for youtube in youtubes %}
         <b>Title:</b> {{ youtube.title }}<br>
 
-        <b>Author:</b> {{ youtube.author }}<br>
+        {% if youtube.author %}
+            <b>Author:</b> {{ youtube.author }}<br>
+        {% endif %}
 
         <b>Status:</b> {{ youtube.read_status() }}<br>
 
         {% if youtube.link %}
-                <a href="{{ youtube.link }}"><b>Link</b></a><br>
+                <b>Link: </b>
+                <a href="{{ youtube.link }}">{{ youtube.link }}</a><br>
         {% endif %}
 
         {% if youtube.descript %}
@@ -126,8 +147,11 @@ Lukuvinkki-View
             <input type="submit" name="change_status_button" value="Change status">
             <input type="hidden" value={{ youtube.id }} name="lukuvinkki_id">
         </form>
+        <form action="/lukuvinkkiview" method="POST">
+            <input type="submit" name="edit_button" value="Edit">
+            <input type="hidden" value={{ youtube.id }} name="lukuvinkki_id">
+        </form>
         <br>
-
         {% endfor %}
         <hr>
 {% endif %}

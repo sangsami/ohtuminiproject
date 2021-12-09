@@ -1,14 +1,14 @@
 {% extends "layout.html" %}
 
 {% block title %}
-Lukuvinkki-Add
+Change current lukuvinkki
 {% endblock %}
 
 
 {% block body %}
 
 
-<h1>Add a lukuvinkki</h1>
+<h1>Change current lukuvinkki</h1>
 <h2>Lukuvinkki type: {{ type }}</h2>
 
 <form action="/addlukuvinkki" method="POST">
@@ -22,38 +22,39 @@ Lukuvinkki-Add
     {% endif %}
   {% endwith %}
   <input type="hidden" name="type" id="type" value="{{ type }}">
+  <input type="hidden" name="id" id="id" value="{{ lukuvinkki_id }}">
   <div>
     <label for="title">Title</label><br />
-    <input type="text" name="title" id="title"/>
+    <input type="text" name="title" id="title" value="{{ lukuvinkki.title or '' }}" />
   </div>
 
   {% if "Youtube" not in type %}
     <div>
     <label for="author">Author</label><br />
-    <input type="text" name="author" id="author"/>
+    <input type="text" name="author" id="author" value="{{ lukuvinkki.author or '' }}" />
     </div>
   {% endif %}
 
   {% if "Book" in type %}
     <div>
     <label for="ISBN">ISBN</label><br />
-    <input type="text" name="ISBN" id="ISBN"/>
+    <input type="text" name="ISBN" id="ISBN" />
     </div>
   {% endif %}
 
   <div>
     <label for="link">Link</label><br />
-    <input type="text" name="link" id="link"/>
+    <input type="text" name="link" id="link" value="{{ lukuvinkki.link or '' }}"/>
   </div>
 
   <div>
       <label for="description">Description</label><br />
-      <textarea name="description" id="description" rows="4" cols="50"></textarea>
+      <textarea name="description" id="description" rows="4" cols="50">{{ lukuvinkki.descript or '' }}</textarea>
   </div>
 
   <div>
     <label for="comment">Comment</label><br />
-    <textarea name="comment" id="comment" rows="2" cols="50"></textarea>
+    <textarea name="comment" id="comment" rows="2" cols="50">{{ lukuvinkki.comment or '' }}</textarea>
   </div>
 
   <div class="btn-group">

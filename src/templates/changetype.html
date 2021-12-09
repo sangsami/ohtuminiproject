@@ -1,11 +1,13 @@
 {% extends "layout.html" %}
 
 {% block title %}
-Choose type for new lukuvinkki
+Change lukuvinkkitype
 {% endblock %}
 
+
 {% block body %}
-    <form action="/choosetype" method="POST">
+    <form action="/changetype" method="POST">
+        <h2>Current lukuvinkki type: {{ lukuvinkki.type }}</h2>
         <br>
         <input type="radio" name="type" id="book" value="Book" checked/>
         <label for="book">Book</label>
@@ -20,7 +22,7 @@ Choose type for new lukuvinkki
         <label for="video">Youtube</label>
         <br>
         <br>
-        <input type="hidden" name="changetip" id="changetip" value="{{ changetip }}"/>
+        <input type="hidden" name="lukuvinkki" id="lukuvinkki" value="{{ lukuvinkki.id }}"/>
         <input type="submit" name="submit" id="submit" value="Submit"/>
     </form>
 {% endblock %}
