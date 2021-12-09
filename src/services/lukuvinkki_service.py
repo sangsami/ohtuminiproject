@@ -1,3 +1,4 @@
+from app import db
 from entities.lukuvinkki import Lukuvinkki
 from repositories.lukuvinkki_repository import (
     lukuvinkki_repository as default_lukuvinkki_repository
@@ -31,6 +32,11 @@ class LukuvinkkiService:
             comment,
             type
             ))
+
+    def change_lukuvinkki_status(self, id):
+        lukuvinkki = self._lukuvinkki_repository.get_lukuvinkki(id)
+        lukuvinkki.change_read()
+        db.session.commit()
 
     def get_lukuvinkkis(self):
         return self._lukuvinkki_repository.find_all()

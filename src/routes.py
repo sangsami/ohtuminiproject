@@ -47,14 +47,22 @@ def handle_addlukuvinkki():
             flash("The lukuvinkki was saved.")
         except (LukuvinkkiTitleOrAuthor, LukuvinkkiExistsError) as error:
             flash(str(error))
-        return redirect("/addlukuvinkki")    
+        return redirect("/addlukuvinkki")
 
-@app.route("/lukuvinkkiview")
+@app.route("/lukuvinkkiview", methods=["GET"])
 @login_required
 def render_lukuvinkkiview():
     all_lukuvinkki = lukuvinkki_service.get_lukuvinkkis()
     return render_template(
         "lukuvinkkiview.html", all_lukuvinkki=all_lukuvinkki)
+
+@app.route("/lukuvinkkiview", methods=["POST"])
+@login_required
+def handle_lukuvinkkiview():
+    if "change_status_button" in request.form:
+        id = request.form.get("lukuvinkki_id")
+        lukuvinkki_service.change_lukuvinkki_status(id)
+        return redirect("/lukuvinkkiview")
 
 
 @app.route("/ping")
