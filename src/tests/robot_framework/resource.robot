@@ -5,7 +5,7 @@ Library  ../../AppLibrary.py
 *** Variables ***
 ${SERVER}  localhost:5000
 ${BROWSER}  chrome
-${DELAY}  0.1 seconds
+${DELAY}  0 seconds
 ${HOME URL}  http://${SERVER}
 ${CHOOSETYPE_URL}  http://${SERVER}/choosetype
 ${ADDLUKUVINKKI URL}  http://${SERVER}/addlukuvinkki
@@ -36,6 +36,9 @@ Logout Page Should Be Open
 
 Go To Main Page
     Go To  ${HOME URL}
+
+Go to Choose Type Page
+    Go to  ${CHOOSETYPE_URL}
 
 Go To Add Lukuvinkki Page
     Go To  ${ADDLUKUVINKKI URL}
