@@ -6,16 +6,20 @@ class LukuvinkkiRepository:
         self._lukuvinkkis = []
 
     def find_all(self):
-        return self._lukuvinkkis
+        return Lukuvinkki.query.order_by(Lukuvinkki.id.desc()).all()
 
     def create(self, lukuvinkki):
-        self._lukuvinkkis.append(lukuvinkki)
+        db.session.add(lukuvinkki)
+        db.session.commit()
 
     def check_lukuvinkki(self, title, author):
         for lukuvinkki in self._lukuvinkkis:
-            if title == lukuvinkki.title() and author == lukuvinkki.author():
+            if title == lukuvinkki.title and author == lukuvinkki.author:
                 return True
         return False
+    
+    def get_lukuvinkki(self, id):
+        return Lukuvinkki.query.get(id)
 
     def delete_all(self):
         self._lukuvinkkis = []

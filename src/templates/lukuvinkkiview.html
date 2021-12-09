@@ -7,25 +7,39 @@ Lukuvinkki-View
 {% block body %}
 <h1>All lukuvinkkis: </h1>
 <hr>
-{% for lukuvinkki in all_lukuvinkki %}
-    <b>Title:</b> {{ lukuvinkki.title() }}<br>
+{% if all_lukuvinkki %}
+    {% for lukuvinkki in all_lukuvinkki %}
+        <b>Type:</b> {{ lukuvinkki.current_type }}<br>
 
-    <b>Author:</b> {{ lukuvinkki.author() }}<br>
+        <b>Title:</b> {{ lukuvinkki.title }}<br>
 
-    {% if lukuvinkki.link() %}
-        <b>Link:</b> {{ lukuvinkki.link() }}<br>
-    {% endif %}
+        <b>Author:</b> {{ lukuvinkki.author }}<br>
 
-    {% if lukuvinkki.description() %}
-        <b>Description:</b> {{ lukuvinkki.description() }}<br>
-    {% endif %}
+        <b>Status:</b> {{ lukuvinkki.read_status() }}<br>
 
-    {% if lukuvinkki.comment() %}
-        <b>Comment:</b> {{ lukuvinkki.comment() }}
-    {% endif %}
+        {% if lukuvinkki.link %}
+            <b>Link:</b> {{ lukuvinkki.link }}<br>
+        {% endif %}
 
-    <hr>
+        {% if lukuvinkki.descript %}
+            <b>Description:</b> {{ lukuvinkki.descript }}<br>
+        {% endif %}
+
+        {% if lukuvinkki.comment %}
+            <b>Comment:</b> {{ lukuvinkki.comment }}
+        {% endif %}
+
+        <form action="/lukuvinkkiview" method="POST">
+            <input type="submit" name="change_status_button" value="Change status">
+            <input type="hidden" value={{ lukuvinkki.id }} name="lukuvinkki_id">
+        </form>
+        <br>
+
+        <hr>
+        {% endfor %}
+
+{% endif %}
     
-{% endfor %}
+
 
 {% endblock %}
