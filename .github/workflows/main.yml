@@ -1,3 +1,5 @@
+name: CI
+
 on:
   push:
     branches: [main]
@@ -31,6 +33,10 @@ jobs:
         run: pip install poetry
       - name: Install dependencies
         run: poetry install
+      - name: build db
+        run: poetry run python3 src/db_init.py
+        env:
+          DATABASE_URL: postgres://postgres:postgres@localhost:${{ job.services.postgres.ports[5432] }}/postgres
       - name: Run tests
         run: poetry run coverage run --branch -m pytest
         env:
@@ -39,12 +45,8 @@ jobs:
         run: poetry run coverage xml
       - name: Coverage report to Codecov
         run: bash <(curl -s https://codecov.io/bash)
-      - name: build db
-        run: poetry run python3 src/db_init.py
-        env:
-          DATABASE_URL: postgres://postgres:postgres@localhost:${{ job.services.postgres.ports[5432] }}/postgres
-      - name: Lint
-        run: poetry run pylint src
+     - name: Lint
+        run: poetry run pylint --fail-under=8 src
         env:
           DATABASE_URL: postgres://postgres:postgres@localhost:${{ job.services.postgres.ports[5432] }}/postgres
       - name: Run robot tests
@@ -52,3 +54,5 @@ jobs:
         env:
           BROWSER: headlesschrome
           DELAY: 0.01 seconds
+          DATABASE_URL: postgres://postgres:postgres@localhost:${{ job.services.postgres.ports[5432] }}/postgres
+          APP_SECRET: 42d07a061d77dd1c5ab7231416616a5e26a4025fcd9543e897ccafb02b84eac4
