@@ -1,6 +1,5 @@
 from app import db
-import enum
-
+# pylint: disable=no-member
 class Lukuvinkki(db.Model):
     __tablename__ = "lukuvinkki"
     id = db.Column(db.Integer, primary_key = True)
