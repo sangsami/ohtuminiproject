@@ -76,7 +76,7 @@ def handle_changelukuvinkki():
     if "view_button" in request.form:
         return render_lukuvinkkiview()
     else:
-        id = request.form("id")
+        id = request.form.get("id")
         type = request.form["type"]
         title = request.form.get("title")
         author = request.form.get("author")
@@ -90,7 +90,7 @@ def handle_changelukuvinkki():
             flash("The lukuvinkki was saved.")
         except (LukuvinkkiTitle, LukuvinkkiExistsError) as error:
             flash(str(error))
-        return render_template("addlukuvinkki.html", type=type)
+        return render_template("index.html")
 
 @app.route("/lukuvinkkiview", methods=["GET"])
 @login_required

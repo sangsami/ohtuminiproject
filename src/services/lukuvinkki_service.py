@@ -35,14 +35,14 @@ class LukuvinkkiService:
 
     def change_lukuvinkki(
             self, id, title, author, link, description, comment, type):
-            lukuvinkki = self._lukuvinkki_repository.get_lukuvinkki(id)
-            lukuvinkki.title = title,
-            lukuvinkki.title = author,
-            lukuvinkki.title = link,
-            lukuvinkki.title = description,
-            lukuvinkki.title = comment,
-            lukuvinkki.title = type,
-            db.session.commit()
+        self._lukuvinkki_repository.change_lukuvinkki(
+            id,
+            title,
+            author,
+            link,
+            description,
+            comment,
+            type)
     
     def change_lukuvinkki_status(self, id):
         lukuvinkki = self._lukuvinkki_repository.get_lukuvinkki(id)

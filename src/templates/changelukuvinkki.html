@@ -11,7 +11,7 @@ Change current lukuvinkki
 <h1>Change current lukuvinkki</h1>
 <h2>Lukuvinkki type: {{ type }}</h2>
 
-<form action="/addlukuvinkki" method="POST">
+<form action="/changelukuvinkki" method="POST">
   {% with messages = get_flashed_messages() %}
     {% if messages %}
       <ul>
@@ -22,7 +22,7 @@ Change current lukuvinkki
     {% endif %}
   {% endwith %}
   <input type="hidden" name="type" id="type" value="{{ type }}">
-  <input type="hidden" name="id" id="id" value="{{ lukuvinkki_id }}">
+  <input type="hidden" name="id" id="id" value="{{ lukuvinkki.id }}">
   <div>
     <label for="title">Title</label><br />
     <input type="text" name="title" id="title" value="{{ lukuvinkki.title or '' }}" />

@@ -24,6 +24,16 @@ class LukuvinkkiRepository:
         db.session.add(lukuvinkki)
         db.session.commit()
 
+    def change_lukuvinkki(self, id, title, author, link, description, comment, type):
+        lukuvinkki = self.get_lukuvinkki(id)
+        lukuvinkki.title = title,
+        lukuvinkki.author = author,
+        lukuvinkki.link = link,
+        lukuvinkki.descript = description,
+        lukuvinkki.comment = comment,
+        lukuvinkki.type = type,
+        db.session.commit()
+
     def check_lukuvinkki(self, title):
         for lukuvinkki in self._lukuvinkkis:
             if title == lukuvinkki.title:
