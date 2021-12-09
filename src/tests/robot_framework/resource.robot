@@ -9,6 +9,8 @@ ${DELAY}  0.1 seconds
 ${HOME URL}  http://${SERVER}
 ${ADDLUKUVINKKI URL}  http://${SERVER}/addlukuvinkki
 ${LUKUVINKKIVIEW URL}  http://${SERVER}/lukuvinkkiview
+${LOGIN URL}  http://${SERVER}/login
+${LOGOUT URL}  http://${SERVER}/logout
 
 *** Keywords ***
 Open and Configure Browser
@@ -33,3 +35,15 @@ Go To Add Lukuvinkki Page
 
 Go To Lukuvinkkiview Page
     Go To  ${LUKUVINKKIVIEW URL}
+
+Go To Login Page
+    Go To  ${LOGIN URL}
+
+Go to Logout Page
+    Go To  ${LOGOUT URL}
+
+Login
+    Go To Login Page
+    Input Text  username  guest
+    Input Text  password  veryStrongPassword
+    Click Button  Login

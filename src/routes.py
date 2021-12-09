@@ -4,14 +4,14 @@ from flask import (
     redirect,
     flash
 )
+from flask_login import login_required
 from app import app
 from repositories.lukuvinkki_repository import lukuvinkki_repository
 from services.lukuvinkki_service import (
     lukuvinkki_service,
     LukuvinkkiExistsError,
-    LukuvinkkiTitleOrAuthor
+    LukuvinkkiTitle
 )
-
 
 #This route is just for demonstrating the usage of the db in this code:
 @app.route("/example_db_ops")
@@ -23,16 +23,31 @@ def example_db_ops():
 def render_home():
     return render_template("index.html")
 
+@app.route("/choosetype")
+@login_required
+def render_choosetype():
+    return render_template("choosetype.html")
 
-@app.route("/addlukuvinkki", methods=["GET"])
-def render_addlukuvinkki():
-    return render_template("addlukuvinkki.html")
+@app.route("/choosetype", methods=["POST"])
+@login_required
+def handle_choosetype():
+    type = request.form["type"]
+    return render_addlukuvinkki(type)
 
+@app.route("/addlukuvinkki")
+@login_required
+def render_addlukuvinkki(type=None):
+    if type is None:
+        type = "Book"
+    return render_template("addlukuvinkki.html", type=type)
 
 @app.route("/addlukuvinkki", methods=["POST"])
+@login_required
 def handle_addlukuvinkki():
-    handle_call = "/addlukuvinkki"
-    if "save_button" in request.form:
+    if "view_button" in request.form:
+        return render_lukuvinkkiview()
+    else:
+        type = request.form["type"]
         title = request.form.get("title")
         author = request.form.get("author")
         description = request.form.get("description")
@@ -41,21 +56,30 @@ def handle_addlukuvinkki():
 
         try:
             lukuvinkki_service.create_lukuvinkki(
-                title, author, description, link, comment)
+                title, author, link, description, comment, type)
             flash("The lukuvinkki was saved.")
-        except (LukuvinkkiTitleOrAuthor, LukuvinkkiExistsError) as error:
+        except (LukuvinkkiTitle, LukuvinkkiExistsError) as error:
             flash(str(error))
+        return render_template("addlukuvinkki.html", type=type)
 
-    elif "view_button" in request.form:
-        handle_call = "/lukuvinkkiview"
-    return redirect(handle_call)
-
-
-@app.route("/lukuvinkkiview")
+@app.route("/lukuvinkkiview", methods=["GET"])
+@login_required
 def render_lukuvinkkiview():
-    all_lukuvinkki = lukuvinkki_service.get_lukuvinkkis()
+    books = lukuvinkki_service.get_books()
+    blog_posts = lukuvinkki_service.get_blog_posts()
+    podcasts = lukuvinkki_service.get_podcasts()
+    youtubes = lukuvinkki_service.get_youtubes()
     return render_template(
-        "lukuvinkkiview.html", all_lukuvinkki=all_lukuvinkki)
+        "lukuvinkkiview.html", books=books, blog_posts=blog_posts,
+        podcasts=podcasts, youtubes=youtubes)
+
+@app.route("/lukuvinkkiview", methods=["POST"])
+@login_required
+def handle_lukuvinkkiview():
+    if "change_status_button" in request.form:
+        id = request.form.get("lukuvinkki_id")
+        lukuvinkki_service.change_lukuvinkki_status(id)
+        return redirect("/lukuvinkkiview")
 
 
 @app.route("/ping")

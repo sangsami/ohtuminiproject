@@ -55,3 +55,4 @@ jobs:
           BROWSER: headlesschrome
           DELAY: 0.01 seconds
           DATABASE_URL: postgres://postgres:postgres@localhost:${{ job.services.postgres.ports[5432] }}/postgres
+          APP_SECRET: 42d07a061d77dd1c5ab7231416616a5e26a4025fcd9543e897ccafb02b84eac4

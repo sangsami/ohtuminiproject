@@ -6,10 +6,11 @@ from flask import (
     request,
     flash
 )
+from flask_login import login_user, logout_user
 from auth.forms import RegistrationForm
 from models.user import User
-
 from app import db
+
 from repositories.user_repository import UserRepository
 from services.user_service import UserService
 
@@ -50,8 +51,10 @@ def login_post():
         flash('Invalid username or password')
         return redirect(url_for('auth.login'))
 
+    login_user(user)
     return redirect(url_for('render_lukuvinkkiview'))
 
 @auth.route('/logout')
 def logout():
+    logout_user()
     return 'Logout'

@@ -7,6 +7,7 @@ Lukuvinkki-Add
 
 {% block body %}
 <h1>Add a lukuvinkki</h1>
+<h2>Lukuvinkki type: {{ type }}</h2>
 
 <form action="/addlukuvinkki" method="POST">
   {% with messages = get_flashed_messages() %}
@@ -18,25 +19,34 @@ Lukuvinkki-Add
       </ul>
     {% endif %}
   {% endwith %}
-
+  <input type="hidden" name="type" id="type" value="{{ type }}"">
   <div>
     <label for="title">Title</label><br />
     <input type="text" name="title" id="title" />
   </div>
 
+  {% if "Youtube" not in type %}
+    <div>
+    <label for="author">Author</label><br />
+    <input type="text" name="author" id="author" />
+    </div>
+  {% endif %}
+
+  {% if "Book" in type %}
+    <div>
+    <label for="ISBN">ISBN</label><br />
+    <input type="text" name="ISBN" id="ISBN" />
+    </div>
+  {% endif %}
+
   <div>
-  <label for="author">Author</label><br />
-  <input type="text" name="author" id="author" />
+    <label for="link">Link</label><br />
+    <input type="text" name="link" id="link" />
   </div>
 
   <div>
       <label for="description">Description</label><br />
       <textarea name="description" id="description" rows="4" cols="50"></textarea>
-  </div>
-
-  <div>
-    <label for="link">Link</label><br />
-    <input type="text" name="link" id="link" />
   </div>
 
   <div>

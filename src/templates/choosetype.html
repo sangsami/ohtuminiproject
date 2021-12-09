@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Choose type for new lukuvinkki
+{% endblock %}
+
+{% block body %}
+<form action="/choosetype" method="POST">
+    <br>
+    <input type="radio" name="type" id="book" value="Book" checked/>
+    <label for="book">Book</label>
+    <br>
+    <input type="radio" name="type" id="blog_post" value="Blog post"/>
+    <label for="blog_post">Blog post</label>
+    <br>
+    <input type="radio" name="type" id="podcast" value="Podcast"/>
+    <label for="podcast">Podcast</label>
+    <br>
+    <input type="radio" name="type" id="video" value="Youtube"/>
+    <label for="video">Youtube</label>
+    <br>
+    <br>
+    <input type="submit" name="submit" id="submit" value="Submit"/>
+</form>
+{% endblock %}
