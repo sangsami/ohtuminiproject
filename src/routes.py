@@ -31,8 +31,10 @@ def render_addlukuvinkki():
 @app.route("/addlukuvinkki", methods=["POST"])
 @login_required
 def handle_addlukuvinkki():
-    handle_call = "/addlukuvinkki"
-    if "save_button" in request.form:
+    if "view_button" in request.form:
+        return render_lukuvinkkiview()
+    else:
+        type = request.form["type"]
         title = request.form.get("title")
         author = request.form.get("author")
         description = request.form.get("description")
@@ -41,14 +43,11 @@ def handle_addlukuvinkki():
 
         try:
             lukuvinkki_service.create_lukuvinkki(
-                title, author, description, link, comment)
+                title, author, link, description, comment, type)
             flash("The lukuvinkki was saved.")
         except (LukuvinkkiTitleOrAuthor, LukuvinkkiExistsError) as error:
             flash(str(error))
-
-    elif "view_button" in request.form:
-        handle_call = "/lukuvinkkiview"
-    return redirect(handle_call)
+        return redirect("/addlukuvinkki")    
 
 @app.route("/lukuvinkkiview")
 @login_required

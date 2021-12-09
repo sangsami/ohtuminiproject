@@ -9,20 +9,24 @@ Lukuvinkki-View
 <hr>
 {% if all_lukuvinkki %}
     {% for lukuvinkki in all_lukuvinkki %}
-        <b>Title:</b> {{ lukuvinkki.title() }}<br>
+        <b>Type:</b> {{ lukuvinkki.current_type }}<br>
 
-        <b>Author:</b> {{ lukuvinkki.author() }}<br>
+        <b>Title:</b> {{ lukuvinkki.title }}<br>
 
-        {% if lukuvinkki.link() %}
-            <b>Link:</b> {{ lukuvinkki.link() }}<br>
+        <b>Author:</b> {{ lukuvinkki.author }}<br>
+
+        <b>Status:</b> {{ lukuvinkki.read_status() }}<br>
+
+        {% if lukuvinkki.link %}
+            <b>Link:</b> {{ lukuvinkki.link }}<br>
         {% endif %}
 
-        {% if lukuvinkki.description() %}
-            <b>Description:</b> {{ lukuvinkki.description() }}<br>
+        {% if lukuvinkki.descript %}
+            <b>Description:</b> {{ lukuvinkki.descript }}<br>
         {% endif %}
 
-        {% if lukuvinkki.comment() %}
-            <b>Comment:</b> {{ lukuvinkki.comment() }}
+        {% if lukuvinkki.comment %}
+            <b>Comment:</b> {{ lukuvinkki.comment }}
         {% endif %}
 
         <hr>

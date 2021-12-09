@@ -20,14 +20,15 @@ Lukuvinkki-Add
   {% endwith %}
 
   <div>
-    <input type="radio" name="type" id="book" value="book"/>
-    <label for="book">Book</label><br />
-    <input type="radio" name="type" id="blog_post" value="blog_post"/>
-    <label for="blog_post">Blog post</label><br />
-    <input type="radio" name="type" id="podcast" value="podcast"/>
-    <label for="podcast">Podcast</label><br />
-    <input type="radio" name="type" id="video" value="video"/>
-    <label for="video">Video</label><br />
+    <input type="radio" name="type" id="book" value="Book" checked/>
+    <label for="book">Book</label>
+    <input type="radio" name="type" id="blog_post" value="Blog post"/>
+    <label for="blog_post">Blog post</label>
+    <input type="radio" name="type" id="podcast" value="Podcast"/>
+    <label for="podcast">Podcast</label>
+    <input type="radio" name="type" id="video" value="Youtube"/>
+    <label for="video">Video</label>
+    <br/>
    
   </div>
 
@@ -42,13 +43,13 @@ Lukuvinkki-Add
   </div>
 
   <div>
-      <label for="description">Description</label><br />
-      <textarea name="description" id="description" rows="4" cols="50"></textarea>
+    <label for="link">Link</label><br />
+    <input type="text" name="link" id="link" />
   </div>
 
   <div>
-    <label for="link">Link</label><br />
-    <input type="text" name="link" id="link" />
+      <label for="description">Description</label><br />
+      <textarea name="description" id="description" rows="4" cols="50"></textarea>
   </div>
 
   <div>
