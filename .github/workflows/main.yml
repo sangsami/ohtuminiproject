@@ -33,6 +33,10 @@ jobs:
         run: pip install poetry
       - name: Install dependencies
         run: poetry install
+      - name: build db
+        run: poetry run python3 src/db_init.py
+        env:
+          DATABASE_URL: postgres://postgres:postgres@localhost:${{ job.services.postgres.ports[5432] }}/postgres
       - name: Run tests
         run: poetry run coverage run --branch -m pytest
         env:
@@ -41,11 +45,7 @@ jobs:
         run: poetry run coverage xml
       - name: Coverage report to Codecov
         run: bash <(curl -s https://codecov.io/bash)
-      - name: build db
-        run: poetry run python3 src/db_init.py
-        env:
-          DATABASE_URL: postgres://postgres:postgres@localhost:${{ job.services.postgres.ports[5432] }}/postgres
-      - name: Lint
+     - name: Lint
         run: poetry run pylint src
         env:
           DATABASE_URL: postgres://postgres:postgres@localhost:${{ job.services.postgres.ports[5432] }}/postgres
