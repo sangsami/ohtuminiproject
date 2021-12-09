@@ -1,7 +1,7 @@
 import unittest
 from app import db # pylint: disable=unused-import
 from services.lukuvinkki_service import (
-    LukuvinkkiService, LukuvinkkiExistsError, LukuvinkkiTitleOrAuthor
+    LukuvinkkiService, LukuvinkkiExistsError, LukuvinkkiTitle
 )
 from repositories.lukuvinkki_repository import LukuvinkkiRepository
 
@@ -40,11 +40,11 @@ class TestLukuvinkki(unittest.TestCase):
 
     def test_cant_add_lukuvinkki_without_title(self):
         self.assertRaises(
-            LukuvinkkiTitleOrAuthor,
+            LukuvinkkiTitle,
             self._lukuvinkki_service.create_lukuvinkki, "", "", "", "", "")
 
     def test_cant_add_lukuvinkki_without_author(self):
         self.assertRaises(
-            LukuvinkkiTitleOrAuthor,
+            LukuvinkkiTitle,
             self._lukuvinkki_service.create_lukuvinkki,
             "A title", "", "", "", "")
