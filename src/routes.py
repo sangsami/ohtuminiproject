@@ -13,12 +13,6 @@ from services.lukuvinkki_service import (
     LukuvinkkiTitle
 )
 
-#This route is just for demonstrating the usage of the db in this code:
-@app.route("/example_db_ops")
-def example_db_ops():
-    lukuvinkki_service.example_db_ops()
-    return "tested db -- check db"
-
 @app.route("/")
 def render_home():
     if current_user.is_authenticated:

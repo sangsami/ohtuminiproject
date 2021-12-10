@@ -75,8 +75,5 @@ class LukuvinkkiService:
     def get_youtubes(self):
         return self._lukuvinkki_repository.get_youtubes()
 
-    def example_db_ops(self):
-        self._lukuvinkki_repository.example_db_ops()
-
 
 lukuvinkki_service = LukuvinkkiService()

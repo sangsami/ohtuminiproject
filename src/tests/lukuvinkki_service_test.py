@@ -3,14 +3,7 @@ from unittest.mock import Mock, ANY
 from app import db # pylint: disable=unused-import
 from services.lukuvinkki_service import LukuvinkkiService, LukuvinkkiTitle, LukuvinkkiExistsError
 
-class Lukuvinkki_repo_stub:
-    def __init__(self):
-        pass
-    
-    def check_lukuvinkki(self, title):
-        if title=="exists":
-            return True
-        return False
+
 
 lukuvinkki_repo_mock = Mock()
 
@@ -38,3 +31,11 @@ class TestLukuvinkkiClass(unittest.TestCase):
     def test_change_lukuvinkki_calls_repository(self):
         self.lukuvinkki_service.change_lukuvinkki("New info", "diiba1", "daaba2", "diiba3", "daaba4", "diiba5", "daaba6", "diiba7")
         lukuvinkki_repo_mock.change_lukuvinkki.assert_called_with("New info", "diiba1", "daaba2", "diiba3", "daaba4", "diiba5", "daaba6", "diiba7")
+
+    def test_get_lukuvinkkis_gets_lukuvinkkis(self):
+        self.lukuvinkki_service.get_lukuvinkkis()
+        lukuvinkki_repo_mock.find_all.assert_called()
+
+    def test_get_books_gets_books(self):
+        self.lukuvinkki_service.get_books()
+        lukuvinkki_repo_mock.get_books.assert_called()
