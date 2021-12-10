@@ -18,7 +18,7 @@ class LukuvinkkiService:
         self._lukuvinkki_repository = lukuvinkki_repository
 
     def create_lukuvinkki(
-            self, title, author, link, description, comment, type):
+            self, title, author, link, description, comment, lukuvinkki_type):
         if len(title) == 0:
             raise LukuvinkkiTitle(
                 "Check that you have entered atleast a title.")
@@ -30,11 +30,19 @@ class LukuvinkkiService:
             link,
             description,
             comment,
-            type
+            lukuvinkki_type
             ))
 
     def change_lukuvinkki(
-            self, id, title, author, link, description, comment, type):
+            self,
+            id,
+            title,
+            author,
+            link,
+            description,
+            comment,
+            lukuvinkki_type
+            ):
         self._lukuvinkki_repository.change_lukuvinkki(
             id,
             title,
@@ -42,8 +50,8 @@ class LukuvinkkiService:
             link,
             description,
             comment,
-            type)
-    
+            lukuvinkki_type)
+
     def change_lukuvinkki_status(self, id):
         lukuvinkki = self._lukuvinkki_repository.get_lukuvinkki(id)
         lukuvinkki.change_read()
@@ -54,7 +62,7 @@ class LukuvinkkiService:
 
     def get_books(self):
         return self._lukuvinkki_repository.get_books()
-    
+
     def get_blog_posts(self):
         return self._lukuvinkki_repository.get_blog_posts()
 

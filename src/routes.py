@@ -33,23 +33,30 @@ def render_choosetype():
 @app.route("/choosetype", methods=["POST"])
 @login_required
 def handle_choosetype():
-    type = request.form["type"]
-    return render_addlukuvinkki(type=type)
+    lukuvinkki_type = request.form["type"]
+    return render_addlukuvinkki(lukuvinkki_type=lukuvinkki_type)
 
 @app.route("/changetype", methods=["POST"])
 @login_required
 def handle_changetype():
-    type = request.form["type"]
-    lukuvinkki_id = request.form["lukuvinkki"]
+    lukuvinkki_type = request.form["type"]
+    lukuvinkki_id = request.form["lukuvinkki_id"]
     lukuvinkki = lukuvinkki_repository.get_lukuvinkki(lukuvinkki_id)
-    return render_template("/changelukuvinkki.html", type=type, lukuvinkki=lukuvinkki)
+    return render_template(
+        "/changelukuvinkki.html",
+        lukuvinkki_type=lukuvinkki_type,
+        lukuvinkki=lukuvinkki
+        )
 
 @app.route("/addlukuvinkki")
 @login_required
-def render_addlukuvinkki(type=None):
-    if type is None:
-        type = "Book"
-    return render_template("addlukuvinkki.html", type=type)
+def render_addlukuvinkki(lukuvinkki_type=None):
+    if lukuvinkki_type is None:
+        lukuvinkki_type = "Book"
+    return render_template(
+        "addlukuvinkki.html",
+        lukuvinkki_type=lukuvinkki_type
+        )
 
 @app.route("/addlukuvinkki", methods=["POST"])
 @login_required
@@ -57,7 +64,7 @@ def handle_addlukuvinkki():
     if "view_button" in request.form:
         return render_lukuvinkkiview()
     else:
-        type = request.form["type"]
+        lukuvinkki_type = request.form["type"]
         title = request.form.get("title")
         author = request.form.get("author")
         description = request.form.get("description")
@@ -66,11 +73,14 @@ def handle_addlukuvinkki():
 
         try:
             lukuvinkki_service.create_lukuvinkki(
-                title, author, link, description, comment, type)
+                title, author, link, description, comment, lukuvinkki_type)
             flash("The lukuvinkki was saved.")
         except (LukuvinkkiTitle, LukuvinkkiExistsError) as error:
             flash(str(error))
-        return render_template("addlukuvinkki.html", type=type)
+        return render_template(
+            "addlukuvinkki.html",
+            lukuvinkki_type=lukuvinkki_type
+            )
 
 @app.route("/changelukuvinkki", methods=["POST"])
 @login_required
@@ -78,8 +88,8 @@ def handle_changelukuvinkki():
     if "view_button" in request.form:
         return render_lukuvinkkiview()
     else:
-        id = request.form.get("id")
-        type = request.form["type"]
+        lukuvinkki_id = request.form.get("lukuvinkki_id")
+        lukuvinkki_type = request.form["type"]
         title = request.form.get("title")
         author = request.form.get("author")
         description = request.form.get("description")
@@ -88,7 +98,14 @@ def handle_changelukuvinkki():
 
         try:
             lukuvinkki_service.change_lukuvinkki(
-                id, title, author, link, description, comment, type)
+                lukuvinkki_id,
+                title,
+                author,
+                link,
+                description,
+                comment,
+                lukuvinkki_type
+                )
             flash("The lukuvinkki was saved.")
         except (LukuvinkkiTitle, LukuvinkkiExistsError) as error:
             flash(str(error))
@@ -109,13 +126,14 @@ def render_lukuvinkkiview():
 @login_required
 def handle_lukuvinkkiview():
     if "change_status_button" in request.form:
-        id = request.form.get("lukuvinkki_id")
-        lukuvinkki_service.change_lukuvinkki_status(id)
+        lukuvinkki_id = request.form.get("lukuvinkki_id")
+        lukuvinkki_service.change_lukuvinkki_status(lukuvinkki_id)
         return redirect("/lukuvinkkiview")
-    elif "edit_button" in request.form:
-        id = request.form.get("lukuvinkki_id")
-        lukuvinkki = lukuvinkki_repository.get_lukuvinkki(id)
+    if "edit_button" in request.form:
+        lukuvinkki_id = request.form.get("lukuvinkki_id")
+        lukuvinkki = lukuvinkki_repository.get_lukuvinkki(lukuvinkki_id)
         return render_template("/changetype.html", lukuvinkki=lukuvinkki)
+    return redirect("/lukuvinkkiview")
 
 
 @app.route("/ping")
@@ -123,7 +141,7 @@ def ping():
     return "Pong"
 
 
-@app.route("/tests/reset", methods = ["POST"])
+@app.route("/tests/reset", methods=["POST"])
 def reset_tests():
     lukuvinkki_repository.delete_all()
     return "Reset"

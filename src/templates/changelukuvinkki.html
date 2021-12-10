@@ -6,10 +6,8 @@ Change current lukuvinkki
 
 
 {% block body %}
-
-
 <h1>Change current lukuvinkki</h1>
-<h2>Lukuvinkki type: {{ type }}</h2>
+<h2>Lukuvinkki type: {{ lukuvinkki_type }}</h2>
 
 <form action="/changelukuvinkki" method="POST">
   {% with messages = get_flashed_messages() %}
@@ -21,21 +19,21 @@ Change current lukuvinkki
       </ul>
     {% endif %}
   {% endwith %}
-  <input type="hidden" name="type" id="type" value="{{ type }}">
-  <input type="hidden" name="id" id="id" value="{{ lukuvinkki.id }}">
+  <input type="hidden" name="type" id="type" value="{{ lukuvinkki_type }}">
+  <input type="hidden" name="lukuvinkki_id" id="lukuvinkki_id" value="{{ lukuvinkki.lukuvinkki_id }}">
   <div>
     <label for="title">Title</label><br />
     <input type="text" name="title" id="title" value="{{ lukuvinkki.title or '' }}" />
   </div>
 
-  {% if "Youtube" not in type %}
+  {% if "Youtube" not in lukuvinkki_type %}
     <div>
     <label for="author">Author</label><br />
     <input type="text" name="author" id="author" value="{{ lukuvinkki.author or '' }}" />
     </div>
   {% endif %}
 
-  {% if "Book" in type %}
+  {% if "Book" in lukuvinkki_type %}
     <div>
     <label for="ISBN">ISBN</label><br />
     <input type="text" name="ISBN" id="ISBN" />
