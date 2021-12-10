@@ -1,6 +1,6 @@
 import unittest
-from unittest.mock import Mock
-from app import db # pylint: disable=unused-import, disable=line-too-long
+# pylint: disable=unused-import, disable=line-too-long
+from app import db 
 from entities.lukuvinkki import Lukuvinkki
 from repositories.lukuvinkki_repository import LukuvinkkiRepository
 
@@ -41,7 +41,7 @@ class TestLukuvinkkiRepository(unittest.TestCase):
         self.lukuvinkki_repository.delete_lukuvinkki(testvinkkis[0].lukuvinkki_id)
         self.assertTrue(flag)
 
-    def test_repository_checks_lukuvinkki_that_exists(self):
+    def test_repository_checks_lukuvinkki_that_does_not_exist(self):
         flag = self.lukuvinkki_repository.check_lukuvinkki("A title that probably does not exit because the name is super long and obscure vol.2")
         self.assertFalse(flag)
 
