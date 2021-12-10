@@ -31,7 +31,7 @@ class Lukuvinkki(db.Model):
         self.current_type = type
         self.title = title
         self.author = author
-        self.isbn = isbn,
+        self.isbn = isbn
         self.descript = description
         self.link = link
         self.comment = comment

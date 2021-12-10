@@ -36,7 +36,7 @@ class LukuvinkkiService:
 
     def change_lukuvinkki(
             self,
-            id,
+            lukuvinkki_id,
             title,
             author,
             isbn,
@@ -46,7 +46,7 @@ class LukuvinkkiService:
             lukuvinkki_type
             ):
         self._lukuvinkki_repository.change_lukuvinkki(
-            id,
+            lukuvinkki_id,
             title,
             author,
             isbn,

@@ -21,7 +21,7 @@ class LukuvinkkiRepository:
     def find_all(self):
         return Lukuvinkki.query.order_by(Lukuvinkki.lukuvinkki_id.desc()).all()
 
-# pylint: enable=line-too-long
+# pylint: enable=line-too-long, disable=too-many-arguments
 
     def create(self, lukuvinkki):
         db.session.add(lukuvinkki)
@@ -30,14 +30,14 @@ class LukuvinkkiRepository:
     def change_lukuvinkki(
             self,
             lukuvinkki_id,
-            title, author, ISBN, link,
+            title, author, isbn, link,
             description, comment,
             lukuvinkki_type
             ):
         lukuvinkki = self.get_lukuvinkki(lukuvinkki_id)
         lukuvinkki.title = title
         lukuvinkki.author = author
-        lukuvinkki.ISBN = ISBN
+        lukuvinkki.isbn = isbn
         lukuvinkki.link = link
         lukuvinkki.descript = description
         lukuvinkki.comment = comment
