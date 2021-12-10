@@ -25,10 +25,9 @@ class Lukuvinkki(db.Model):
             is_read=None
             ):
         if is_read is None:
-            self.read = False
-        if type is None:
-            self.current_type = "Book"
-        self.current_type = type
+            is_read = False
+        if lukuvinkki_type is None:
+            lukuvinkki_type = "Book"
         self.title = title
         self.author = author
         self.isbn = isbn
@@ -36,6 +35,7 @@ class Lukuvinkki(db.Model):
         self.link = link
         self.comment = comment
         self.lukuvinkki_type = lukuvinkki_type
+        self.is_read = is_read
 
     def read_status(self):
         return "Read" if self.is_read else "Not read"
