@@ -48,7 +48,7 @@ class LukuvinkkiRepository:
 
     def check_lukuvinkki(self, title):
         query_title = Lukuvinkki.query.filter(Lukuvinkki.title == title).first()
-        if query_title:
+        if query_title is not None:
             return True
         return False
 
@@ -59,9 +59,6 @@ class LukuvinkkiRepository:
         record_obj = Lukuvinkki.query.filter(Lukuvinkki.lukuvinkki_id==lukuvinkki_id).first()
         db.session.delete(record_obj)
         db.session.commit()
-
-    def delete_all(self):
-        self._lukuvinkkis = []
 
     def example_db_ops(self):
         sql = "INSERT into test (username, password) VALUES (:username, :password);"
