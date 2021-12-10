@@ -1,2 +1,3 @@
 [run]
 source = src
+omit = src/tests/**,src/index.py,src/app.py,src/config.py,src/db_init,src/fixforheroku.py,src/routes.py,src/auth/**

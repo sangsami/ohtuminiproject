@@ -12,13 +12,13 @@ class LukuvinkkiExistsError(Exception):
 class LukuvinkkiTitle(Exception):
     pass
 
-
+# pylint: disable=too-many-arguments
 class LukuvinkkiService:
     def __init__(self, lukuvinkki_repository=default_lukuvinkki_repository):
         self._lukuvinkki_repository = lukuvinkki_repository
 
     def create_lukuvinkki(
-            self, title, author, ISBN, link, description, comment, lukuvinkki_type):
+            self, title, author, isbn, link, description, comment, lukuvinkki_type):
         if len(title) == 0:
             raise LukuvinkkiTitle(
                 "Check that you have entered atleast a title.")
@@ -27,7 +27,7 @@ class LukuvinkkiService:
         self._lukuvinkki_repository.create(Lukuvinkki(
             title,
             author,
-            ISBN,
+            isbn,
             link,
             description,
             comment,
@@ -39,7 +39,7 @@ class LukuvinkkiService:
             id,
             title,
             author,
-            ISBN,
+            isbn,
             link,
             description,
             comment,
@@ -49,7 +49,7 @@ class LukuvinkkiService:
             id,
             title,
             author,
-            ISBN,
+            isbn,
             link,
             description,
             comment,

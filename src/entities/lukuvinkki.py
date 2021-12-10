@@ -1,12 +1,12 @@
 from app import db
-# pylint: disable=no-member
+# pylint: disable=no-member, disable=too-many-arguments
 class Lukuvinkki(db.Model):
     __tablename__ = "lukuvinkki"
     lukuvinkki_id = db.Column(db.Integer, primary_key=True)
     lukuvinkki_type = db.Column(db.String(10), nullable=False)
     title = db.Column(db.String(100), nullable=False)
     author = db.Column(db.String(100), nullable=True)
-    ISBN = db.Column(db.String(80), nullable=True)
+    isbn = db.Column(db.String(80), nullable=True)
     is_read = db.Column(db.Boolean, nullable=False, default=False)
     link = db.Column(db.String(120), nullable=True)
     descript = db.Column(db.String(500), nullable=True)
@@ -17,7 +17,7 @@ class Lukuvinkki(db.Model):
             self,
             title,
             author,
-            ISBN,
+            isbn,
             link,
             description,
             comment,
@@ -31,7 +31,7 @@ class Lukuvinkki(db.Model):
         self.current_type = type
         self.title = title
         self.author = author
-        self.ISBN, ISBN,
+        self.isbn = isbn,
         self.descript = description
         self.link = link
         self.comment = comment

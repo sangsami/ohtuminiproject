@@ -66,14 +66,14 @@ def handle_addlukuvinkki():
     lukuvinkki_type = request.form["type"]
     title = request.form.get("title")
     author = request.form.get("author")
-    ISBN = request.form.get("ISBN")
+    isbn = request.form.get("ISBN")
     description = request.form.get("description")
     link = request.form.get("link")
     comment = request.form.get("comment")
 
     try:
         lukuvinkki_service.create_lukuvinkki(
-            title, author, ISBN, link, description, comment, lukuvinkki_type)
+            title, author, isbn, link, description, comment, lukuvinkki_type)
         flash("The lukuvinkki was saved.")
     except (LukuvinkkiTitle, LukuvinkkiExistsError) as error:
         flash(str(error))
@@ -91,7 +91,7 @@ def handle_changelukuvinkki():
     lukuvinkki_type = request.form["type"]
     title = request.form.get("title")
     author = request.form.get("author")
-    ISBN = request.form.get("ISBN")
+    isbn = request.form.get("ISBN")
     description = request.form.get("description")
     link = request.form.get("link")
     comment = request.form.get("comment")
@@ -101,7 +101,7 @@ def handle_changelukuvinkki():
             lukuvinkki_id,
             title,
             author,
-            ISBN,
+            isbn,
             link,
             description,
             comment,
