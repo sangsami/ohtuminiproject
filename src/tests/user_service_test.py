@@ -20,3 +20,7 @@ class TestUserServiceClass(unittest.TestCase):
     def test_check_credentials_looks_for_username(self):
         self.user_service.check_credentials('username', 'password')
         user_repo_mock.find_by_username.assert_called_with('username')
+
+    def test_create_user_creates_user(self):
+        self.user_service.create_user("username", "password")
+        user_repo_mock.create.assert_called()
