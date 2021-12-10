@@ -63,53 +63,54 @@ def render_addlukuvinkki(lukuvinkki_type=None):
 def handle_addlukuvinkki():
     if "view_button" in request.form:
         return render_lukuvinkkiview()
-    else:
-        lukuvinkki_type = request.form["type"]
-        title = request.form.get("title")
-        author = request.form.get("author")
-        description = request.form.get("description")
-        link = request.form.get("link")
-        comment = request.form.get("comment")
+    lukuvinkki_type = request.form["type"]
+    title = request.form.get("title")
+    author = request.form.get("author")
+    ISBN = request.form.get("ISBN")
+    description = request.form.get("description")
+    link = request.form.get("link")
+    comment = request.form.get("comment")
 
-        try:
-            lukuvinkki_service.create_lukuvinkki(
-                title, author, link, description, comment, lukuvinkki_type)
-            flash("The lukuvinkki was saved.")
-        except (LukuvinkkiTitle, LukuvinkkiExistsError) as error:
-            flash(str(error))
-        return render_template(
-            "addlukuvinkki.html",
-            lukuvinkki_type=lukuvinkki_type
-            )
+    try:
+        lukuvinkki_service.create_lukuvinkki(
+            title, author, ISBN, link, description, comment, lukuvinkki_type)
+        flash("The lukuvinkki was saved.")
+    except (LukuvinkkiTitle, LukuvinkkiExistsError) as error:
+        flash(str(error))
+    return render_template(
+        "addlukuvinkki.html",
+        lukuvinkki_type=lukuvinkki_type
+        )
 
 @app.route("/changelukuvinkki", methods=["POST"])
 @login_required
 def handle_changelukuvinkki():
     if "view_button" in request.form:
         return render_lukuvinkkiview()
-    else:
-        lukuvinkki_id = request.form.get("lukuvinkki_id")
-        lukuvinkki_type = request.form["type"]
-        title = request.form.get("title")
-        author = request.form.get("author")
-        description = request.form.get("description")
-        link = request.form.get("link")
-        comment = request.form.get("comment")
+    lukuvinkki_id = request.form.get("lukuvinkki_id")
+    lukuvinkki_type = request.form["type"]
+    title = request.form.get("title")
+    author = request.form.get("author")
+    ISBN = request.form.get("ISBN")
+    description = request.form.get("description")
+    link = request.form.get("link")
+    comment = request.form.get("comment")
 
-        try:
-            lukuvinkki_service.change_lukuvinkki(
-                lukuvinkki_id,
-                title,
-                author,
-                link,
-                description,
-                comment,
-                lukuvinkki_type
-                )
-            flash("The lukuvinkki was saved.")
-        except (LukuvinkkiTitle, LukuvinkkiExistsError) as error:
-            flash(str(error))
-        return render_template("index.html")
+    try:
+        lukuvinkki_service.change_lukuvinkki(
+            lukuvinkki_id,
+            title,
+            author,
+            ISBN,
+            link,
+            description,
+            comment,
+            lukuvinkki_type
+            )
+        flash("The lukuvinkki was saved.")
+    except (LukuvinkkiTitle, LukuvinkkiExistsError) as error:
+        flash(str(error))
+    return render_template("index.html")
 
 @app.route("/lukuvinkkiview", methods=["GET"])
 @login_required

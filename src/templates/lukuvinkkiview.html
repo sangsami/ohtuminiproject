@@ -20,6 +20,10 @@ Lukuvinkki-View
             <b>Author:</b> {{ book.author }}<br>
         {% endif %}
 
+        {% if book.ISBN %}
+            <b>ISBN:</b> {{ book.ISBN }}<br>
+        {% endif %}
+
         <b>Status:</b> {{ book.read_status() }}<br>
 
         {% if book.link %}

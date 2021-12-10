@@ -18,7 +18,7 @@ class LukuvinkkiService:
         self._lukuvinkki_repository = lukuvinkki_repository
 
     def create_lukuvinkki(
-            self, title, author, link, description, comment, lukuvinkki_type):
+            self, title, author, ISBN, link, description, comment, lukuvinkki_type):
         if len(title) == 0:
             raise LukuvinkkiTitle(
                 "Check that you have entered atleast a title.")
@@ -27,6 +27,7 @@ class LukuvinkkiService:
         self._lukuvinkki_repository.create(Lukuvinkki(
             title,
             author,
+            ISBN,
             link,
             description,
             comment,
@@ -38,6 +39,7 @@ class LukuvinkkiService:
             id,
             title,
             author,
+            ISBN,
             link,
             description,
             comment,
@@ -47,13 +49,14 @@ class LukuvinkkiService:
             id,
             title,
             author,
+            ISBN,
             link,
             description,
             comment,
             lukuvinkki_type)
 
-    def change_lukuvinkki_status(self, id):
-        lukuvinkki = self._lukuvinkki_repository.get_lukuvinkki(id)
+    def change_lukuvinkki_status(self, lukuvinkki_id):
+        lukuvinkki = self._lukuvinkki_repository.get_lukuvinkki(lukuvinkki_id)
         lukuvinkki.change_read()
         db.session.commit()
 

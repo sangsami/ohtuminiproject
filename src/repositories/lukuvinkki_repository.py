@@ -30,13 +30,14 @@ class LukuvinkkiRepository:
     def change_lukuvinkki(
             self,
             lukuvinkki_id,
-            title, author, link,
+            title, author, ISBN, link,
             description, comment,
             lukuvinkki_type
             ):
         lukuvinkki = self.get_lukuvinkki(lukuvinkki_id)
         lukuvinkki.title = title
         lukuvinkki.author = author
+        lukuvinkki.ISBN = ISBN
         lukuvinkki.link = link
         lukuvinkki.descript = description
         lukuvinkki.comment = comment

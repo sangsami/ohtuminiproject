@@ -27,14 +27,14 @@ Lukuvinkki-Add
     <input type="text" name="title" id="title"/>
   </div>
 
-  {% if "Youtube" not in type %}
+  {% if "Youtube" not in lukuvinkki_type %}
     <div>
     <label for="author">Author</label><br />
     <input type="text" name="author" id="author"/>
     </div>
   {% endif %}
 
-  {% if "Book" in type %}
+  {% if "Book" in lukuvinkki_type %}
     <div>
     <label for="ISBN">ISBN</label><br />
     <input type="text" name="ISBN" id="ISBN"/>

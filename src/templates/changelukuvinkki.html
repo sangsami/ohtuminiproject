@@ -36,7 +36,7 @@ Change current lukuvinkki
   {% if "Book" in lukuvinkki_type %}
     <div>
     <label for="ISBN">ISBN</label><br />
-    <input type="text" name="ISBN" id="ISBN" />
+    <input type="text" name="ISBN" id="ISBN" value="{{ lukuvinkki.ISBN or '' }}" />
     </div>
   {% endif %}
 

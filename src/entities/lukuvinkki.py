@@ -6,6 +6,7 @@ class Lukuvinkki(db.Model):
     lukuvinkki_type = db.Column(db.String(10), nullable=False)
     title = db.Column(db.String(100), nullable=False)
     author = db.Column(db.String(100), nullable=True)
+    ISBN = db.Column(db.String(80), nullable=True)
     is_read = db.Column(db.Boolean, nullable=False, default=False)
     link = db.Column(db.String(120), nullable=True)
     descript = db.Column(db.String(500), nullable=True)
@@ -16,6 +17,7 @@ class Lukuvinkki(db.Model):
             self,
             title,
             author,
+            ISBN,
             link,
             description,
             comment,
@@ -29,6 +31,7 @@ class Lukuvinkki(db.Model):
         self.current_type = type
         self.title = title
         self.author = author
+        self.ISBN, ISBN,
         self.descript = description
         self.link = link
         self.comment = comment
