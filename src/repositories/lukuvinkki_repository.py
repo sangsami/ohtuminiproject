@@ -21,6 +21,10 @@ class LukuvinkkiRepository:
     def find_all(self):
         return Lukuvinkki.query.order_by(Lukuvinkki.lukuvinkki_id.desc()).all()
 
+    def find_by_name(self, searchterm):
+        print("works this far")
+        return Lukuvinkki.query.filter(Lukuvinkki.title.ilike("%" + searchterm +"%")).all()
+
 # pylint: enable=line-too-long, disable=too-many-arguments
 
     def create(self, lukuvinkki):

@@ -130,6 +130,15 @@ def handle_lukuvinkkiview():
         return render_template("/changetype.html", lukuvinkki=lukuvinkki)
     return redirect("/lukuvinkkiview")
 
+@app.route("/lukuvinkkisearch")
+def render_lukuvinkkisearchview():
+    searchterm = request.args.get('searchterm')
+    if not searchterm:
+        searchterm = ""
+    result = lukuvinkki_service.find_by_name(searchterm)
+    return render_template(
+        "lukuvinkkiview.html", books=result, blog_posts=None,
+        podcasts=None, youtubes=None)
 
 @app.route("/ping")
 def ping():

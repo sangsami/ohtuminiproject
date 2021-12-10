@@ -75,5 +75,8 @@ class LukuvinkkiService:
     def get_youtubes(self):
         return self._lukuvinkki_repository.get_youtubes()
 
+    def find_by_name(self, searchterm):
+        return self._lukuvinkki_repository.find_by_name(searchterm)
+
 
 lukuvinkki_service = LukuvinkkiService()
