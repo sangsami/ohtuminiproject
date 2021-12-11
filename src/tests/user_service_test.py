@@ -1,5 +1,5 @@
 import unittest
-from unittest.mock import Mock, ANY
+from unittest.mock import Mock
 from app import db # pylint: disable=unused-import
 from services.user_service import UserService
 
