@@ -130,15 +130,32 @@ def handle_lukuvinkkiview():
         return render_template("/changetype.html", lukuvinkki=lukuvinkki)
     return redirect("/lukuvinkkiview")
 
-@app.route("/lukuvinkkisearch")
+@app.route("/search", methods=["GET"])
+@login_required
+def render_searchview():
+    return render_template(
+        "search.html")
+
+@app.route("/search", methods=["POST"])
+@login_required
+def handle_search():
+    searchterm = request.form.get("searchterm")
+    return redirect(
+        "/lukuvinkkiresult?searchterm=" + searchterm)
+
+@app.route("/lukuvinkkiresult")
 def render_lukuvinkkisearchview():
     searchterm = request.args.get('searchterm')
     if not searchterm:
         searchterm = ""
-    result = lukuvinkki_service.find_by_name(searchterm)
+    books = lukuvinkki_service.get_books(searchterm)
+    blog_posts = lukuvinkki_service.get_blog_posts(searchterm)
+    podcasts = lukuvinkki_service.get_podcasts(searchterm)
+    youtubes = lukuvinkki_service.get_youtubes(searchterm)
+    result = (len(books)+len(blog_posts)+len(podcasts)+len(youtubes))>0
     return render_template(
-        "lukuvinkkiview.html", books=result, blog_posts=None,
-        podcasts=None, youtubes=None)
+        "searchresult.html", result=result, books=books, blog_posts=blog_posts,
+        podcasts=podcasts, youtubes=youtubes)
 
 @app.route("/ping")
 def ping():

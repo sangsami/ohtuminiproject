@@ -1,15 +1,19 @@
 {% extends "layout.html" %}
 
 {% block title %}
-Lukuvinkki-View
+Lukuvinkki-search result
 {% endblock %}
 
 {% block body %}
-<h1>All lukuvinkkis: </h1>
+{% if result %}
+<h1>Your lukuvinkki-search returned: </h1>
+{% else %}
+<h1>Your search returned nothing.</h1>
+{% endif %}
 <hr>
+<a href="/search">Try a new search</a>&nbsp;
 <a href="/">Go to main page</a>&nbsp;
-<a href="/choosetype">Add a new lukuvinkki</a>&nbsp;
-<a href="/search">Search for lukuvinkkis</a>&nbsp;
+<a href="/choosetype">Add a new lukuvinkki</a></li>&nbsp;
 <a href="/logout">Logout</a></li>
 <hr>
 {% if books %}

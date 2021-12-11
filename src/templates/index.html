@@ -16,6 +16,7 @@ You are currently logged in as <b>{{ name }}</b>
     {% if current_user.is_authenticated %}
     <li><a href="/choosetype">Add a new lukuvinkki</a></li>
     <li><a href="/lukuvinkkiview">View all lukuvinkkis</a></li>
+    <li><a href="/search">Search for lukuvinkkis</a></li>
     {% else %}
     <li><a href="/register">Register</a></li>
     <li><a href="/login">Login</a></li>

@@ -6,24 +6,20 @@ class LukuvinkkiRepository:
     def __init__(self):
         pass
 
-    def get_books(self):
-        return Lukuvinkki.query.filter(Lukuvinkki.lukuvinkki_type == "Book").order_by(Lukuvinkki.lukuvinkki_id.desc()).all()
+    def get_books(self, searchterm=""):
+        return Lukuvinkki.query.filter(Lukuvinkki.lukuvinkki_type == "Book").filter(Lukuvinkki.title.ilike("%" + searchterm +"%")).order_by(Lukuvinkki.lukuvinkki_id.desc()).all()
 
-    def get_blog_posts(self):
-        return Lukuvinkki.query.filter(Lukuvinkki.lukuvinkki_type == "Blog post").order_by(Lukuvinkki.lukuvinkki_id.desc()).all()
+    def get_blog_posts(self, searchterm=""):
+        return Lukuvinkki.query.filter(Lukuvinkki.lukuvinkki_type == "Blog post").filter(Lukuvinkki.title.ilike("%" + searchterm +"%")).order_by(Lukuvinkki.lukuvinkki_id.desc()).all()
 
-    def get_podcasts(self):
-        return Lukuvinkki.query.filter(Lukuvinkki.lukuvinkki_type == "Podcast").order_by(Lukuvinkki.lukuvinkki_id.desc()).all()
+    def get_podcasts(self, searchterm=""):
+        return Lukuvinkki.query.filter(Lukuvinkki.lukuvinkki_type == "Podcast").filter(Lukuvinkki.title.ilike("%" + searchterm +"%")).order_by(Lukuvinkki.lukuvinkki_id.desc()).all()
 
-    def get_youtubes(self):
-        return Lukuvinkki.query.filter(Lukuvinkki.lukuvinkki_type == "Youtube").order_by(Lukuvinkki.lukuvinkki_id.desc()).all()
+    def get_youtubes(self, searchterm=""):
+        return Lukuvinkki.query.filter(Lukuvinkki.lukuvinkki_type == "Youtube").filter(Lukuvinkki.title.ilike("%" + searchterm +"%")).order_by(Lukuvinkki.lukuvinkki_id.desc()).all()
 
     def find_all(self):
         return Lukuvinkki.query.order_by(Lukuvinkki.lukuvinkki_id.desc()).all()
-
-    def find_by_name(self, searchterm):
-        print("works this far")
-        return Lukuvinkki.query.filter(Lukuvinkki.title.ilike("%" + searchterm +"%")).all()
 
 # pylint: enable=line-too-long, disable=too-many-arguments
 

@@ -63,17 +63,17 @@ class LukuvinkkiService:
     def get_lukuvinkkis(self):
         return self._lukuvinkki_repository.find_all()
 
-    def get_books(self):
-        return self._lukuvinkki_repository.get_books()
+    def get_books(self, searchterm=""):
+        return self._lukuvinkki_repository.get_books(searchterm)
 
-    def get_blog_posts(self):
-        return self._lukuvinkki_repository.get_blog_posts()
+    def get_blog_posts(self, searchterm=""):
+        return self._lukuvinkki_repository.get_blog_posts(searchterm)
 
-    def get_podcasts(self):
-        return self._lukuvinkki_repository.get_podcasts()
+    def get_podcasts(self, searchterm=""):
+        return self._lukuvinkki_repository.get_podcasts(searchterm)
 
-    def get_youtubes(self):
-        return self._lukuvinkki_repository.get_youtubes()
+    def get_youtubes(self, searchterm=""):
+        return self._lukuvinkki_repository.get_youtubes(searchterm)
 
     def find_by_name(self, searchterm):
         return self._lukuvinkki_repository.find_by_name(searchterm)
