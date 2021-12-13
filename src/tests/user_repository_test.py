@@ -47,3 +47,13 @@ class TestUserRepository(unittest.TestCase):
 
         self.db_mock.session.add.assert_not_called()
         self.db_mock.session.commit.assert_not_called()
+
+    def test_db_find_by_id(self):
+        self.db_mock.session.query().filter_by().first.return_value = self.results[1]
+        result = self.user_repository.find_by_id('testaaja')
+        self.assertAlmostEqual(result.username, 'testaaja')
+
+    def test_db_find_by_id_with_non_existing_id(self):
+        self.db_mock.session.query().filter_by().first.return_value = None
+        result = self.user_repository.find_by_id('eiOlemassa')
+        self.assertIsNone(result)
