@@ -9,7 +9,7 @@ Test Teardown  Go to Logout Page
 Lukuvinkkiview Page Is Open
     Lukuvinkkiview Page Should Be Open
 
-Click Go to main Page
+Click Go to Main Page
     Click Link  Go to main page
     Main Page Should Be Open
 

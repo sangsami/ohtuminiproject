@@ -42,4 +42,3 @@ class TestLukuvinkkiClass(unittest.TestCase):
 
     def test_lukuvinkki_prints_correctly(self):
         self.assertEqual("Book: A title", str(self.lukuvinkki_default_values))
-

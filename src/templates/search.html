@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Search for lukuvinkkis
+{% endblock %}
+
+{% block body %}
+<h1>Lukuvinkkisearch</h1>
+
+<p>Enter a word that you would like to search for.
+
+<form action="/search" method="post">
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    
+    <div>
+        <input type="text" name="searchterm" id="searchterm">
+    </div>
+    <p></p>
+
+    <button>
+        Search
+    </button>
+
+</form>
+{% endblock %}
