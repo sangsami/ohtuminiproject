@@ -18,6 +18,7 @@ class RegistrationForm(Form):
     password = PasswordField('Password', [
         validators.Length(min=8, message='Password needs to be 8 characters long or longer'),
         validators.DataRequired(message='Password is required'),
+        validators.Regexp('^.*\d.*[A-Z].*|.*[A-Z].*\d.*$', message='Password must be alpha numeric'),
         validators.EqualTo('password_confirmation', message='Passwords must match')
     ])
 
