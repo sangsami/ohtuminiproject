@@ -19,6 +19,9 @@ class TestUserModel(unittest.TestCase):
 
     def test_user_has_time_created(self):
         self.assertIsNotNone(self.user.time_created)
-    
+
     def test_user_is_printed_correctly(self):
-        self.assertAlmostEqual(str(self.user), f'<User(username=guest, time_created={self.user.time_created})>')
+        self.assertAlmostEqual(
+            str(self.user),
+            f'<User(username=guest, time_created={self.user.time_created})>'
+            )
