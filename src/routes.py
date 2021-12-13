@@ -149,12 +149,12 @@ def render_lukuvinkkisearchview():
     if not searchterm:
         searchterm = ""
     books = lukuvinkki_service.get_books(searchterm)
-    blog_posts = lukuvinkki_service.get_blog_posts(searchterm)
+    blogs = lukuvinkki_service.get_blog_posts(searchterm)
     podcasts = lukuvinkki_service.get_podcasts(searchterm)
     youtubes = lukuvinkki_service.get_youtubes(searchterm)
-    result = (len(books)+len(blog_posts)+len(podcasts)+len(youtubes))>0
+    result = (len(books)+len(blogs)+len(podcasts)+len(youtubes))>0
     return render_template(
-        "searchresult.html", result=result, books=books, blog_posts=blog_posts,
+        "searchresult.html", result=result, books=books, blog_posts=blogs,
         podcasts=podcasts, youtubes=youtubes)
 
 @app.route("/ping")
