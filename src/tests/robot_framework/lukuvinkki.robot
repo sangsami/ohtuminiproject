@@ -96,6 +96,7 @@ Page Should Contain All Info
     Page Should Contain  ${description}
     Page Should Contain  ${link}
     Page Should Contain  ${comment}
+    
 Set Title
     [Arguments]  ${title}
     Input Text  title  ${title}

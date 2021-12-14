@@ -13,6 +13,7 @@ ${LUKUVINKKIVIEW URL}  http://${SERVER}/lukuvinkkiview
 ${LOGIN URL}  http://${SERVER}/login
 ${REGISTER URL}  http://${SERVER}/register
 ${LOGOUT URL}  http://${SERVER}/logout
+${SEARCH URL}  http://${SERVER}/search
 
 *** Keywords ***
 Open and Configure Browser
@@ -61,6 +62,9 @@ Go To Logout Page
 
 Go To Register Page
     Go To  ${REGISTER URL}
+
+Go To Search Page
+    Go To  ${SEARCH URL}
 
 Login
     Go To Login Page
