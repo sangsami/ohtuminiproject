@@ -5,12 +5,10 @@ Lukuvinkki
 {% endblock %}
 
 {% block body %}
-<h1>Lukuvinkki app</h1>
-<hr>
 <a href="/logout">Logout</a></li>
 <hr>
 {% if current_user.is_authenticated %}
-You are currently logged in as <b>{{ name }}</b>
+Welcome <b>{{ name }}</b>, what would you like to do?
 {% endif %}
 <ul>
     {% if current_user.is_authenticated %}
