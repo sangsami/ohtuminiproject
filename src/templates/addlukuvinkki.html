@@ -4,9 +4,7 @@
 Lukuvinkki-Add
 {% endblock %}
 
-
 {% block body %}
-
 
 <h1>Add a lukuvinkki</h1>
 <h2>Lukuvinkki type: {{ lukuvinkki_type }}</h2>
@@ -21,12 +19,19 @@ Lukuvinkki-Add
       </ul>
     {% endif %}
   {% endwith %}
+
   <input type="hidden" name="type" id="type" value="{{ lukuvinkki_type }}">
+  {% if youtube_data %}
+  <div>
+    <label for="title">Title</label><br />
+    <input type="text" name="title" id="title" value="{{ youtube_data.title }}"/>
+  </div>
+  {%  else %}
   <div>
     <label for="title">Title</label><br />
     <input type="text" name="title" id="title"/>
   </div>
-
+  {% endif %}
   {% if "Youtube" not in lukuvinkki_type %}
     <div>
     <label for="author">Author</label><br />
@@ -40,11 +45,17 @@ Lukuvinkki-Add
     <input type="text" name="ISBN" id="ISBN"/>
     </div>
   {% endif %}
-
+  {% if youtube_data %}
+  <div>
+    <label for="link">Link</label><br />
+    <input type="text" name="link" id="link" value="{{ youtube_data.url }}"/>
+  </div>
+  {% else %}
   <div>
     <label for="link">Link</label><br />
     <input type="text" name="link" id="link"/>
   </div>
+  {% endif %}
 
   <div>
       <label for="description">Description</label><br />

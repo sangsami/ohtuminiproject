@@ -4,6 +4,7 @@ from flask import (
     redirect,
     flash
 )
+import requests
 from flask_login import login_required, current_user
 from app import app
 from repositories.lukuvinkki_repository import lukuvinkki_repository
@@ -28,7 +29,23 @@ def render_choosetype():
 @login_required
 def handle_choosetype():
     lukuvinkki_type = request.form["type"]
+    url = request.form['youtube-url']
+    if lukuvinkki_type == 'Youtube' and url:
+        data = get_youtube_information_from_url(url)
+        if data:
+            return render_addlukuvinkki(lukuvinkki_type=lukuvinkki_type, youtube_data=data)
+        flash('Could not find any youtube videos with provided url')
     return render_addlukuvinkki(lukuvinkki_type=lukuvinkki_type)
+
+def get_youtube_information_from_url(video_url):
+    url = f'https://www.youtube.com/oembed?url={video_url}&format=json'
+    response = requests.get(url)
+    if response.status_code != 200:
+        return None
+    json_data = response.json()
+    json_data['url'] = video_url
+
+    return json_data
 
 @app.route("/changetype", methods=["POST"])
 @login_required
@@ -44,12 +61,13 @@ def handle_changetype():
 
 @app.route("/addlukuvinkki")
 @login_required
-def render_addlukuvinkki(lukuvinkki_type=None):
+def render_addlukuvinkki(lukuvinkki_type=None, youtube_data=None):
     if lukuvinkki_type is None:
         lukuvinkki_type = "Book"
     return render_template(
         "addlukuvinkki.html",
-        lukuvinkki_type=lukuvinkki_type
+        lukuvinkki_type=lukuvinkki_type,
+        youtube_data=youtube_data
         )
 
 @app.route("/addlukuvinkki", methods=["POST"])
