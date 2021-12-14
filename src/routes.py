@@ -16,7 +16,7 @@ from services.lukuvinkki_service import (
 @app.route("/")
 def render_home():
     if current_user.is_authenticated:
-        return render_template("index.html", name=current_user.username)
+        return redirect("/lukuvinkkiview")
     return redirect("/login")
 
 @app.route("/choosetype")
