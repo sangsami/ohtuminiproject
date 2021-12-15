@@ -82,10 +82,20 @@ def handle_addlukuvinkki():
     description = request.form.get("description")
     link = request.form.get("link")
     comment = request.form.get("comment")
+    is_public = request.form.get("visibility") is not None
 
     try:
         lukuvinkki_service.create_lukuvinkki(
-            title, author, isbn, link, description, comment, lukuvinkki_type)
+            title,
+            author,
+            isbn,
+            link,
+            description,
+            comment,
+            current_user.id,
+            is_public,
+            lukuvinkki_type
+            )
         flash("The lukuvinkki was saved.")
     except (LukuvinkkiTitle, LukuvinkkiExistsError) as error:
         flash(str(error))
@@ -127,13 +137,19 @@ def handle_changelukuvinkki():
 @app.route("/lukuvinkkiview", methods=["GET"])
 @login_required
 def render_lukuvinkkiview():
-    books = lukuvinkki_service.get_books()
-    blog_posts = lukuvinkki_service.get_blog_posts()
-    podcasts = lukuvinkki_service.get_podcasts()
-    youtubes = lukuvinkki_service.get_youtubes()
+    user_id = current_user.id
+    books = lukuvinkki_service.get_books(user_id)
+    blog_posts = lukuvinkki_service.get_blog_posts(user_id)
+    podcasts = lukuvinkki_service.get_podcasts(user_id)
+    youtubes = lukuvinkki_service.get_youtubes(user_id)
     return render_template(
-        "lukuvinkkiview.html", books=books, blog_posts=blog_posts,
-        podcasts=podcasts, youtubes=youtubes)
+        "lukuvinkkiview.html",
+        user_id=user_id,
+        books=books,
+        blog_posts=blog_posts,
+        podcasts=podcasts,
+        youtubes=youtubes
+        )
 
 @app.route("/lukuvinkkiview", methods=["POST"])
 @login_required
@@ -166,10 +182,11 @@ def render_lukuvinkkisearchview():
     searchterm = request.args.get('searchterm')
     if not searchterm:
         searchterm = ""
-    books = lukuvinkki_service.get_books(searchterm)
-    blog_posts = lukuvinkki_service.get_blog_posts(searchterm)
-    podcasts = lukuvinkki_service.get_podcasts(searchterm)
-    youtubes = lukuvinkki_service.get_youtubes(searchterm)
+    user_id = current_user.id
+    books = lukuvinkki_service.get_books(user_id, searchterm)
+    blog_posts = lukuvinkki_service.get_blog_posts(user_id, searchterm)
+    podcasts = lukuvinkki_service.get_podcasts(user_id, searchterm)
+    youtubes = lukuvinkki_service.get_youtubes(user_id, searchterm)
     result = (len(books)+len(blog_posts)+len(podcasts)+len(youtubes))>0
     return render_template(
         "searchresult.html", result=result, books=books, blog_posts=blog_posts,

@@ -6,17 +6,17 @@ class LukuvinkkiRepository:
     def __init__(self):
         pass
 
-    def get_books(self, searchterm=""):
-        return Lukuvinkki.query.filter(Lukuvinkki.lukuvinkki_type == "Book").filter(Lukuvinkki.title.ilike("%" + searchterm +"%")).order_by(Lukuvinkki.lukuvinkki_id.desc()).all()
+    def get_books(self, user_id, searchterm=""):
+        return Lukuvinkki.query.filter((Lukuvinkki.lukuvinkki_type == "Book") & ((Lukuvinkki.user_id == user_id) | ((Lukuvinkki.user_id != user_id) & (Lukuvinkki.is_public == True)))).filter(Lukuvinkki.title.ilike("%" + searchterm +"%")).order_by(Lukuvinkki.lukuvinkki_id.desc()).all()
 
-    def get_blog_posts(self, searchterm=""):
-        return Lukuvinkki.query.filter(Lukuvinkki.lukuvinkki_type == "Blog post").filter(Lukuvinkki.title.ilike("%" + searchterm +"%")).order_by(Lukuvinkki.lukuvinkki_id.desc()).all()
+    def get_blog_posts(self, user_id, searchterm=""):
+        return Lukuvinkki.query.filter((Lukuvinkki.lukuvinkki_type == "Blog post") & ((Lukuvinkki.user_id == user_id) | ((Lukuvinkki.user_id != user_id) & (Lukuvinkki.is_public == True)))).filter(Lukuvinkki.title.ilike("%" + searchterm +"%")).order_by(Lukuvinkki.lukuvinkki_id.desc()).all()
 
-    def get_podcasts(self, searchterm=""):
-        return Lukuvinkki.query.filter(Lukuvinkki.lukuvinkki_type == "Podcast").filter(Lukuvinkki.title.ilike("%" + searchterm +"%")).order_by(Lukuvinkki.lukuvinkki_id.desc()).all()
+    def get_podcasts(self, user_id, searchterm=""):
+        return Lukuvinkki.query.filter((Lukuvinkki.lukuvinkki_type == "Podcast") & ((Lukuvinkki.user_id == user_id) | ((Lukuvinkki.user_id != user_id) & (Lukuvinkki.is_public == True)))).filter(Lukuvinkki.title.ilike("%" + searchterm +"%")).order_by(Lukuvinkki.lukuvinkki_id.desc()).all()
 
-    def get_youtubes(self, searchterm=""):
-        return Lukuvinkki.query.filter(Lukuvinkki.lukuvinkki_type == "Youtube").filter(Lukuvinkki.title.ilike("%" + searchterm +"%")).order_by(Lukuvinkki.lukuvinkki_id.desc()).all()
+    def get_youtubes(self, user_id, searchterm=""):
+        return Lukuvinkki.query.filter((Lukuvinkki.lukuvinkki_type == "Youtube") & ((Lukuvinkki.user_id == user_id) | ((Lukuvinkki.user_id != user_id) & (Lukuvinkki.is_public == True)))).filter(Lukuvinkki.title.ilike("%" + searchterm +"%")).order_by(Lukuvinkki.lukuvinkki_id.desc()).all()
 
     def find_all(self):
         return Lukuvinkki.query.order_by(Lukuvinkki.lukuvinkki_id.desc()).all()
@@ -54,6 +54,11 @@ class LukuvinkkiRepository:
 
     def get_lukuvinkki(self, lukuvinkki_id):
         return Lukuvinkki.query.get(lukuvinkki_id)
+
+    def change_lukuvinkki_status(self, lukuvinkki_id):
+        lukuvinkki = self.get_lukuvinkki(lukuvinkki_id)
+        lukuvinkki.change_read()
+        db.session.commit()
 
     def delete_lukuvinkki(self, lukuvinkki_id):
         record_obj = Lukuvinkki.query.filter(Lukuvinkki.lukuvinkki_id==lukuvinkki_id).first()

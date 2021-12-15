@@ -8,6 +8,7 @@ class Lukuvinkki(db.Model):
     author = db.Column(db.String(100), nullable=True)
     isbn = db.Column(db.String(80), nullable=True)
     is_read = db.Column(db.Boolean, nullable=False, default=False)
+    is_public = db.Column(db.Boolean, nullable=False, default=False)
     link = db.Column(db.String(120), nullable=True)
     descript = db.Column(db.String(500), nullable=True)
     comment = db.Column(db.String(500), nullable=True)
@@ -21,19 +22,25 @@ class Lukuvinkki(db.Model):
             link,
             description,
             comment,
+            user_id,
+            is_public=None,
             lukuvinkki_type=None,
             is_read=None
             ):
-        if is_read is None:
-            is_read = False
+        if is_public is None:
+            is_public = False
         if lukuvinkki_type is None:
             lukuvinkki_type = "Book"
+        if is_read is None:
+            is_read = False
         self.title = title
         self.author = author
         self.isbn = isbn
         self.descript = description
         self.link = link
         self.comment = comment
+        self.user_id = user_id
+        self.is_public = is_public
         self.lukuvinkki_type = lukuvinkki_type
         self.is_read = is_read
 
