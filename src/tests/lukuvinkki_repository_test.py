@@ -1,6 +1,6 @@
 import unittest
 # pylint: disable=unused-import, disable=line-too-long
-from app import db 
+from app import db
 from entities.lukuvinkki import Lukuvinkki
 from repositories.lukuvinkki_repository import LukuvinkkiRepository
 

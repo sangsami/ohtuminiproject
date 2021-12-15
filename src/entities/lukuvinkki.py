@@ -1,3 +1,4 @@
+from datetime import datetime
 from app import db
 # pylint: disable=no-member, disable=too-many-arguments
 class Lukuvinkki(db.Model):
@@ -11,6 +12,7 @@ class Lukuvinkki(db.Model):
     link = db.Column(db.String(120), nullable=True)
     descript = db.Column(db.String(500), nullable=True)
     comment = db.Column(db.String(500), nullable=True)
+    read_timestamp = db.Column(db.DateTime(timezone = True), nullable =True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
     def __init__(
@@ -36,12 +38,17 @@ class Lukuvinkki(db.Model):
         self.comment = comment
         self.lukuvinkki_type = lukuvinkki_type
         self.is_read = is_read
+        self.read_timestamp = None
 
     def read_status(self):
-        return "Read" if self.is_read else "Not read"
+        if self.read_timestamp is not None:
+            reading_time = self.read_timestamp
+            reading_time = reading_time.strftime("%d.%m.%y  %H:%M")
+        return f"Read - {reading_time:>15}" if self.is_read else "Not read"
 
     def change_read(self):
         self.is_read = not self.is_read
+        self.read_timestamp = datetime.now()
 
     def __str__(self):
         return f"{self.lukuvinkki_type}: {self.title}"
