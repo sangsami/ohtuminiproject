@@ -195,9 +195,3 @@ def render_lukuvinkkisearchview():
 @app.route("/ping")
 def ping():
     return "Pong"
-
-
-@app.route("/tests/reset", methods=["POST"])
-def reset_tests():
-    lukuvinkki_repository.delete_all()
-    return "Reset"
