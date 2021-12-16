@@ -8,7 +8,7 @@ from repositories.lukuvinkki_repository import LukuvinkkiRepository
 class TestLukuvinkkiRepository(unittest.TestCase):
     def setUp(self):
         self.lukuvinkki_repository = LukuvinkkiRepository()
-        self.lukuvinkki = Lukuvinkki(
+        lukuvinkki = Lukuvinkki(
                         "A title",
                         "An author",
                         "isbn",
@@ -18,7 +18,12 @@ class TestLukuvinkkiRepository(unittest.TestCase):
                         1,
                         is_read=False
                         )
-        self.lukuvinkki_repository.create(self.lukuvinkki)
+        self.lukuvinkki_repository.create(lukuvinkki)
+
+    def tearDown(self) -> None:
+        testvinkkis = self.lukuvinkki_repository.find_all()
+        lukuvinkki_id = testvinkkis[0].lukuvinkki_id
+        self.lukuvinkki_repository.delete_lukuvinkki(lukuvinkki_id)
 
     def test_repository_creates_lukuvinkki(self):
         testvinkkis = self.lukuvinkki_repository.find_all()
@@ -63,7 +68,6 @@ class TestLukuvinkkiRepository(unittest.TestCase):
     def test_repository_changes_read_status(self):
         testvinkkis = self.lukuvinkki_repository.find_all()
         lukuvinkki_id = testvinkkis[0].lukuvinkki_id
-        lukuvinkki = self.lukuvinkki_repository.get_lukuvinkki(lukuvinkki_id)
         self.lukuvinkki_repository.change_lukuvinkki(
             lukuvinkki_id,
             "New title",
@@ -72,8 +76,8 @@ class TestLukuvinkkiRepository(unittest.TestCase):
             "New link",
             "New description",
             "New comment",
-            lukuvinkki.is_public,
-            lukuvinkki.lukuvinkki_type
+            testvinkkis[0].is_public,
+            testvinkkis[0].lukuvinkki_type
         )
         lukuvinkki = self.lukuvinkki_repository.get_lukuvinkki(lukuvinkki_id)
         self.assertEqual(lukuvinkki.title, "New title")
@@ -87,5 +91,6 @@ class TestLukuvinkkiRepository(unittest.TestCase):
         testvinkkis = self.lukuvinkki_repository.find_all()
         lukuvinkki_id = testvinkkis[0].lukuvinkki_id
         self.lukuvinkki_repository.change_lukuvinkki_status(lukuvinkki_id)
-        lukuvinkki = self.lukuvinkki_repository.get_lukuvinkki(lukuvinkki_id)
-        self.assertTrue(lukuvinkki.is_read)
+        flag = testvinkkis[0].is_read
+        self.lukuvinkki_repository.delete_lukuvinkki(lukuvinkki_id)
+        self.assertTrue(flag)
