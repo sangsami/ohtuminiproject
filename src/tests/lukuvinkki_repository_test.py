@@ -16,18 +16,20 @@ class TestLukuvinkkiRepository(unittest.TestCase):
                         "A description",
                         "A comment",
                         1,
+                        is_read=False
                         )
-
-    def test_repository_creates_lukuvinkkis(self):
         self.lukuvinkki_repository.create(self.lukuvinkki)
+
+    def test_repository_creates_lukuvinkki(self):
         testvinkkis = self.lukuvinkki_repository.find_all()
-        title = testvinkkis[0].title
-        author = testvinkkis[0].author
-        isbn = testvinkkis[0].isbn
-        descript = testvinkkis[0].descript
-        link = testvinkkis[0].link
-        comment = testvinkkis[0].comment
-        self.lukuvinkki_repository.delete_lukuvinkki(testvinkkis[0].lukuvinkki_id)
+        lukuvinkki_id = testvinkkis[0].lukuvinkki_id
+        lukuvinkki = self.lukuvinkki_repository.get_lukuvinkki(lukuvinkki_id)
+        title = lukuvinkki.title
+        author = lukuvinkki.author
+        isbn = lukuvinkki.isbn
+        descript = lukuvinkki.descript
+        link = lukuvinkki.link
+        comment = lukuvinkki.comment
         self.assertEqual(title, "A title")
         self.assertEqual(author, "An author")
         self.assertEqual(isbn, "isbn")
@@ -36,10 +38,7 @@ class TestLukuvinkkiRepository(unittest.TestCase):
         self.assertEqual(comment, "A comment")
 
     def test_repository_checks_lukuvinkki_that_exists(self):
-        self.lukuvinkki_repository.create(self.lukuvinkki)
-        testvinkkis = self.lukuvinkki_repository.find_all()
         flag = self.lukuvinkki_repository.check_lukuvinkki("A title", 1, "Book")
-        self.lukuvinkki_repository.delete_lukuvinkki(testvinkkis[0].lukuvinkki_id)
         self.assertTrue(flag)
 
     def test_repository_checks_lukuvinkki_that_does_not_exist(self):
@@ -47,7 +46,6 @@ class TestLukuvinkkiRepository(unittest.TestCase):
         self.assertFalse(flag)
 
     def test_repository_checks_lukuvinkki_that_does_not_exists(self):
-        self.lukuvinkki_repository.create(self.lukuvinkki)
         testvinkkis = self.lukuvinkki_repository.find_all()
         title = testvinkkis[0].title
         author = testvinkkis[0].author
@@ -55,10 +53,39 @@ class TestLukuvinkkiRepository(unittest.TestCase):
         descript = testvinkkis[0].descript
         link = testvinkkis[0].link
         comment = testvinkkis[0].comment
-        self.lukuvinkki_repository.delete_lukuvinkki(testvinkkis[0].lukuvinkki_id)
         self.assertEqual(title, "A title")
         self.assertEqual(author, "An author")
         self.assertEqual(isbn, "isbn")
         self.assertEqual(descript, "A description")
         self.assertEqual(link, "A link")
         self.assertEqual(comment, "A comment")
+
+    def test_repository_changes_read_status(self):
+        testvinkkis = self.lukuvinkki_repository.find_all()
+        lukuvinkki_id = testvinkkis[0].lukuvinkki_id
+        lukuvinkki = self.lukuvinkki_repository.get_lukuvinkki(lukuvinkki_id)
+        self.lukuvinkki_repository.change_lukuvinkki(
+            lukuvinkki_id,
+            "New title",
+            "New author",
+            "New isbn",
+            "New link",
+            "New description",
+            "New comment",
+            lukuvinkki.is_public,
+            lukuvinkki.lukuvinkki_type
+        )
+        lukuvinkki = self.lukuvinkki_repository.get_lukuvinkki(lukuvinkki_id)
+        self.assertEqual(lukuvinkki.title, "New title")
+        self.assertEqual(lukuvinkki.author, "New author")
+        self.assertEqual(lukuvinkki.isbn, "New isbn")
+        self.assertEqual(lukuvinkki.descript, "New description")
+        self.assertEqual(lukuvinkki.link, "New link")
+        self.assertEqual(lukuvinkki.comment, "New comment")
+
+    def test_repository_changes_lukuvinkki(self):
+        testvinkkis = self.lukuvinkki_repository.find_all()
+        lukuvinkki_id = testvinkkis[0].lukuvinkki_id
+        self.lukuvinkki_repository.change_lukuvinkki_status(lukuvinkki_id)
+        lukuvinkki = self.lukuvinkki_repository.get_lukuvinkki(lukuvinkki_id)
+        self.assertTrue(lukuvinkki.is_read)

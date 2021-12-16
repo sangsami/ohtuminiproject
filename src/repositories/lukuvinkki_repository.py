@@ -33,8 +33,12 @@ class LukuvinkkiRepository:
     def change_lukuvinkki(
             self,
             lukuvinkki_id,
-            title, author, isbn, link,
-            description, comment,
+            title,
+            author,
+            isbn,
+            link,
+            description,
+            comment,
             is_public,
             lukuvinkki_type
             ):
