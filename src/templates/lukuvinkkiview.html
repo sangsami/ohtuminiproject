@@ -11,7 +11,7 @@ Lukuvinkki-View
 <a href="/search">Search for lukuvinkkis</a>&nbsp;
 <a href="/logout">Logout</a></li>
 <hr>
-<h2>Private lukuvinkkis:</h2>
+<h2>Own lukuvinkkis:</h2>
 <hr>
 {% if books %}
     <h3>Books: </h3>
@@ -26,8 +26,6 @@ Lukuvinkki-View
             <b>ISBN:</b> {{ book.isbn }}<br>
         {% endif %}
 
-        <b>Status:</b> {{ book.read_status() }}<br>
-
         {% if book.link %}
             <b>Link: </b>
             <a href="{{ book.link }}">{{ book.link }}</a><br>
@@ -38,9 +36,11 @@ Lukuvinkki-View
         {% endif %}
 
         {% if book.comment %}
-            <b>Comment:</b> {{ book.comment }}
+            <b>Comment:</b> {{ book.comment }}<br>
         {% endif %}
 
+        <b>Status:</b> {{ book.read_status() }}<br>
+        <b>Visibility:</b> {{ "Public" if book.is_public else "Private" }}<br>
         <form action="/lukuvinkkiview" method="POST">
             <input type="submit" name="change_status_button" value="Change status">
             <input type="hidden" value={{ book.lukuvinkki_id }} name="lukuvinkki_id">
@@ -64,8 +64,6 @@ Lukuvinkki-View
             <b>Author:</b> {{ blog_post.author }}<br>
         {% endif %}
 
-        <b>Status:</b> {{ blog_post.read_status() }}<br>
-
         {% if blog_post.link %}
                 <b>Link: </b>
                 <a href="{{ blog_post.link }}">{{ blog_post.link }}</a><br>
@@ -78,6 +76,9 @@ Lukuvinkki-View
         {% if blog_post.comment %}
             <b>Comment:</b> {{ blog_post.comment }}
         {% endif %}
+
+        <b>Status:</b> {{ blog_post.read_status() }}<br>
+        <b>Visibility:</b> {{ "Public" if blog_post.is_public else "Private"}}<br>
 
         <form action="/lukuvinkkiview" method="POST">
             <input type="submit" name="change_status_button" value="Change status">
@@ -101,8 +102,6 @@ Lukuvinkki-View
             <b>Author:</b> {{ podcast.author }}<br>
         {% endif %}
 
-        <b>Status:</b> {{ podcast.read_status() }}<br>
-
         {% if podcast.link %}
                 <b>Link: </b>
                 <a href="{{ podcast.link }}">{{ podcast.link }}</a><br>
@@ -116,6 +115,8 @@ Lukuvinkki-View
             <b>Comment:</b> {{ podcast.comment }}
         {% endif %}
 
+        <b>Status:</b> {{ podcast.read_status() }}<br>
+        <b>Visibility:</b> {{ "Public" if podcast.is_public else "Private"}}<br>
         <form action="/lukuvinkkiview" method="POST">
             <input type="submit" name="change_status_button" value="Change status">
             <input type="hidden" value={{ podcast.lukuvinkki_id }} name="lukuvinkki_id">
@@ -138,8 +139,6 @@ Lukuvinkki-View
             <b>Author:</b> {{ youtube.author }}<br>
         {% endif %}
 
-        <b>Status:</b> {{ youtube.read_status() }}<br>
-
         {% if youtube.link %}
                 <b>Link: </b>
                 <a href="{{ youtube.link }}">{{ youtube.link }}</a><br>
@@ -153,6 +152,8 @@ Lukuvinkki-View
             <b>Comment:</b> {{ youtube.comment }}
         {% endif %}
 
+        <b>Status:</b> {{ youtube.read_status() }}<br>
+        <b>Visibility:</b> {{ "Public" if youtube.is_public else "Private" }}<br>
         <form action="/lukuvinkkiview" method="POST">
             <input type="submit" name="change_status_button" value="Change status">
             <input type="hidden" value={{ youtube.lukuvinkki_id }} name="lukuvinkki_id">
