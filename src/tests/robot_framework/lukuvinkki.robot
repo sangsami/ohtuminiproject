@@ -1,5 +1,6 @@
 *** Settings ***
 Resource  resource.robot
+Library  DateTime
 Suite Setup  Open and Configure Browser
 Suite Teardown  Close Browser
 Test Setup  Run Keywords  Login
@@ -81,6 +82,22 @@ View Lukuvinkki Button Takes to Lukuvinkkiview Page
     Lukuvinkkiview Page Should Be Open
 
 # Sprint 3 Acceptance criterias:
+#As a user, I can mark my lukuvinkki with a timestamp
+Changing Status To Read Shows Timestamp
+    Click Logout
+    Go To Register Page
+    Register With  tyhjalukuvinkkikayttaja  veryStrongPassword  veryStrongPassword
+    Goto Login Page
+    Login With  tyhjalukuvinkkikayttaja  veryStrongPassword
+    Go to Choose Type Page
+    Select Book As Type
+    Submit
+    Set Title  Dyyni
+    Save
+    Click View Lukuvinkkis
+    Change Status
+    Change Status Should Succeed
+
 # As a user I can add lukuvinkki by youtube-url
 Add Youtube Video From URL
     Go To Choose Type Page
@@ -113,8 +130,6 @@ Can See Private Lukuvinkki Added By Another account
     Save
     Go to Lukuvinkkiview Page
     Click Logout
-    Go To Register Page
-    Register With  tyhjalukuvinkkikayttaja  veryStrongPassword  veryStrongPassword
     Goto Login Page
     Login With  tyhjalukuvinkkikayttaja  veryStrongPassword
     Page Should Contain All Info  Harry Potter ja Azkabanin vanki  J.K. Rowling  J. K. Rowlingin teossarjan kolmas osa  https://www.adlibris.com/fi/kirja/harry-potter-ja-azkabanin-vanki-9789513187040  Nidottu
@@ -132,8 +147,6 @@ Cannot See Private Lukuvinkki Added By Another account
     Save
     Go to Lukuvinkkiview Page
     Click Logout
-    Go To Register Page
-    Register With  tyhjalukuvinkkikayttaja  veryStrongPassword  veryStrongPassword
     Goto Login Page
     Login With  tyhjalukuvinkkikayttaja  veryStrongPassword
     Page Should Contain Not All Info  Taru Sormusten Herrasta: Sormuksen ritarit  J. R. R. Tolkien  Kaikenikäisten klassikko, tulvillaan seikkailua, jännitystä ja huumoria!  https://www.adlibris.com/fi/e-kirja/taru-sormusten-herrasta-sormuksen-ritarit-9789510468265  E-kirja
@@ -173,7 +186,11 @@ Youtube Add Should Contain
     [Arguments]  ${title}  ${author}
     Textfield Should Contain  title  ${title}
     Textfield Should Contain  author  ${author}
-    
+
+Change Status Should Succeed
+    ${date} =  Get Current Date  result_format=%d.%m.%y
+    Page Should Contain  ${date}
+ 
 Set Title
     [Arguments]  ${title}
     Input Text  title  ${title}
@@ -204,6 +221,9 @@ Set ISBN
 
 Set Public
     Select Checkbox  visibility
+    
+Change Status
+    Click Button  change_status_button
 
 Save
     Click Button  save_button

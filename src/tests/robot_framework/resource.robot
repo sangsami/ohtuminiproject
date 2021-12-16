@@ -3,7 +3,7 @@ Library  SeleniumLibrary
 Library  ../../AppLibrary.py
 
 *** Variables ***
-${SERVER}  localhost:5000
+${SERVER}  127.0.0.1:5000
 ${BROWSER}  chrome
 ${DELAY}  0.0 seconds
 ${HOME URL}  http://${SERVER}
