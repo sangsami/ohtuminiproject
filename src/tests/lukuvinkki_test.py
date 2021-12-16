@@ -11,6 +11,7 @@ class TestLukuvinkkiClass(unittest.TestCase):
             "A description",
             "A link",
             "A comment",
+            1
             )
 
         self.lukuvinkki_has_type = Lukuvinkki(
@@ -20,6 +21,7 @@ class TestLukuvinkkiClass(unittest.TestCase):
             "A description",
             "A link",
             "A comment",
+            1,
             lukuvinkki_type="Podcast"
             )
 
@@ -30,6 +32,7 @@ class TestLukuvinkkiClass(unittest.TestCase):
             "A description",
             "A link",
             "A comment",
+            1,
             is_read=True
             )
 

@@ -11,8 +11,10 @@ Lukuvinkki-View
 <a href="/search">Search for lukuvinkkis</a>&nbsp;
 <a href="/logout">Logout</a></li>
 <hr>
+<h2>Private lukuvinkkis:</h2>
+<hr>
 {% if books %}
-    <h2>Books: </h2>
+    <h3>Books: </h3>
     {% for book in books %}
         <b>Title:</b> {{ book.title }}<br>
         
@@ -24,9 +26,7 @@ Lukuvinkki-View
             <b>ISBN:</b> {{ book.isbn }}<br>
         {% endif %}
 
-        {% if not book.is_public %}
         <b>Status:</b> {{ book.read_status() }}<br>
-        {% endif %}
 
         {% if book.link %}
             <b>Link: </b>
@@ -41,23 +41,21 @@ Lukuvinkki-View
             <b>Comment:</b> {{ book.comment }}
         {% endif %}
 
-        {% if book.user_id == user_id%}
-            <form action="/lukuvinkkiview" method="POST">
-                <input type="submit" name="change_status_button" value="Change status">
-                <input type="hidden" value={{ book.lukuvinkki_id }} name="lukuvinkki_id">
-            </form>
-            <form action="/lukuvinkkiview" method="POST">
-                <input type="submit" name="edit_button" value="Edit">
-                <input type="hidden" value={{ book.lukuvinkki_id }} name="lukuvinkki_id">
-            </form>
-        {% endif %}
+        <form action="/lukuvinkkiview" method="POST">
+            <input type="submit" name="change_status_button" value="Change status">
+            <input type="hidden" value={{ book.lukuvinkki_id }} name="lukuvinkki_id">
+        </form>
+        <form action="/lukuvinkkiview" method="POST">
+            <input type="submit" name="edit_button" value="Edit">
+            <input type="hidden" value={{ book.lukuvinkki_id }} name="lukuvinkki_id">
+        </form>
         <br>
         {% endfor %}
         <hr>
 {% endif %}
 
 {% if blog_posts %}
-    <h2>Blog posts: </h2>
+    <h3>Blog posts: </h3>
     {% for blog_post in blog_posts %}
 
         <b>Title:</b> {{ blog_post.title }}<br>
@@ -81,23 +79,21 @@ Lukuvinkki-View
             <b>Comment:</b> {{ blog_post.comment }}
         {% endif %}
 
-        {% if blog_post.user_id == user_id %}
-            <form action="/lukuvinkkiview" method="POST">
-                <input type="submit" name="change_status_button" value="Change status">
-                <input type="hidden" value={{ blog_post.lukuvinkki_id }} name="lukuvinkki_id">
-            </form>
-            <form action="/lukuvinkkiview" method="POST">
-                <input type="submit" name="edit_button" value="Edit">
-                <input type="hidden" value={{ blog_post.lukuvinkki_id }} name="lukuvinkki_id">
-            </form>
-        {% endif %}
+        <form action="/lukuvinkkiview" method="POST">
+            <input type="submit" name="change_status_button" value="Change status">
+            <input type="hidden" value={{ blog_post.lukuvinkki_id }} name="lukuvinkki_id">
+        </form>
+        <form action="/lukuvinkkiview" method="POST">
+            <input type="submit" name="edit_button" value="Edit">
+            <input type="hidden" value={{ blog_post.lukuvinkki_id }} name="lukuvinkki_id">
+        </form>
         <br>
         {% endfor %}
         <hr>
 {% endif %}
 
 {% if podcasts %}
-    <h2>Podcasts: </h2>
+    <h3>Podcasts: </h3>
     {% for podcast in podcasts %}
         <b>Title:</b> {{ podcast.title }}<br>
 
@@ -134,7 +130,7 @@ Lukuvinkki-View
 {% endif %}
 
 {% if youtubes %}
-    <h2>Youtube videos: </h2>
+    <h3>Youtube videos: </h3>
     {% for youtube in youtubes %}
         <b>Title:</b> {{ youtube.title }}<br>
 
@@ -169,6 +165,37 @@ Lukuvinkki-View
         {% endfor %}
         <hr>
 {% endif %}
+
+{% if publics %}
+    <h2>Public lukuvinkkis: </h2>
+    {% for lukuvinkki in publics %}
+        <b>Type:</b> {{ lukuvinkki.lukuvinkki_type }}<br>
+        <b>Title:</b> {{ lukuvinkki.title }}<br>
+
+        {% if lukuvinkki.author %}
+            <b>Author:</b> {{ lukuvinkki.author }}<br>
+        {% endif %}
+
+        {% if lukuvinkki.link %}
+                <b>Link: </b>
+                <a href="{{ youtube.link }}">{{ youtube.link }}</a><br>
+        {% endif %}
+
+        {% if lukuvinkki.descript %}
+            <b>Description:</b> {{ lukuvinkki.descript }}<br>
+        {% endif %}
+
+        {% if lukuvinkki.comment %}
+            <b>Comment:</b> {{ lukuvinkki.comment }}
+        {% endif %}
+
+        <b>From user id:</b> {{ lukuvinkki.user_id }}<br>
+
+        <br>
+        {% endfor %}
+        <hr>
+{% endif %}
+
 
 
 {% endblock %}

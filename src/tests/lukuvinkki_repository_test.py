@@ -15,6 +15,7 @@ class TestLukuvinkkiRepository(unittest.TestCase):
                         "A link",
                         "A description",
                         "A comment",
+                        1,
                         )
 
     def test_repository_creates_lukuvinkkis(self):
@@ -37,12 +38,12 @@ class TestLukuvinkkiRepository(unittest.TestCase):
     def test_repository_checks_lukuvinkki_that_exists(self):
         self.lukuvinkki_repository.create(self.lukuvinkki)
         testvinkkis = self.lukuvinkki_repository.find_all()
-        flag = self.lukuvinkki_repository.check_lukuvinkki("A title")
+        flag = self.lukuvinkki_repository.check_lukuvinkki("A title", 1, "Book")
         self.lukuvinkki_repository.delete_lukuvinkki(testvinkkis[0].lukuvinkki_id)
         self.assertTrue(flag)
 
     def test_repository_checks_lukuvinkki_that_does_not_exist(self):
-        flag = self.lukuvinkki_repository.check_lukuvinkki("A title that probably does not exit because the name is super long and obscure vol.2")
+        flag = self.lukuvinkki_repository.check_lukuvinkki("A title that probably does not exit because the name is super long and obscure vol.2", -1, "Book")
         self.assertFalse(flag)
 
     def test_repository_checks_lukuvinkki_that_does_not_exists(self):

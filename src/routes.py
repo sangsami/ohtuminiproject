@@ -117,6 +117,7 @@ def handle_changelukuvinkki():
     description = request.form.get("description")
     link = request.form.get("link")
     comment = request.form.get("comment")
+    is_public = request.form.get("visibility") is not None
 
     try:
         lukuvinkki_service.change_lukuvinkki(
@@ -127,12 +128,13 @@ def handle_changelukuvinkki():
             link,
             description,
             comment,
+            is_public,
             lukuvinkki_type
             )
         flash("The lukuvinkki was saved.")
     except (LukuvinkkiTitle, LukuvinkkiExistsError) as error:
         flash(str(error))
-    return render_template("index.html")
+    return redirect("/lukuvinkkiview")
 
 @app.route("/lukuvinkkiview", methods=["GET"])
 @login_required
@@ -142,13 +144,15 @@ def render_lukuvinkkiview():
     blog_posts = lukuvinkki_service.get_blog_posts(user_id)
     podcasts = lukuvinkki_service.get_podcasts(user_id)
     youtubes = lukuvinkki_service.get_youtubes(user_id)
+    publics = lukuvinkki_service.get_publics(user_id)
     return render_template(
         "lukuvinkkiview.html",
         user_id=user_id,
         books=books,
         blog_posts=blog_posts,
         podcasts=podcasts,
-        youtubes=youtubes
+        youtubes=youtubes,
+        publics=publics
         )
 
 @app.route("/lukuvinkkiview", methods=["POST"])
@@ -187,10 +191,11 @@ def render_lukuvinkkisearchview():
     blog_posts = lukuvinkki_service.get_blog_posts(user_id, searchterm)
     podcasts = lukuvinkki_service.get_podcasts(user_id, searchterm)
     youtubes = lukuvinkki_service.get_youtubes(user_id, searchterm)
-    result = (len(books)+len(blog_posts)+len(podcasts)+len(youtubes))>0
+    publics = lukuvinkki_service.get_publics(user_id, searchterm)
+    result = (len(books)+len(blog_posts)+len(podcasts)+len(youtubes)+len(publics)) > 0 # pylint: disable=line-too-long
     return render_template(
         "searchresult.html", result=result, books=books, blog_posts=blog_posts,
-        podcasts=podcasts, youtubes=youtubes)
+        podcasts=podcasts, youtubes=youtubes, publics=publics)
 
 @app.route("/ping")
 def ping():

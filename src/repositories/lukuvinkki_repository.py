@@ -7,21 +7,24 @@ class LukuvinkkiRepository:
         pass
 
     def get_books(self, user_id, searchterm=""):
-        return Lukuvinkki.query.filter((Lukuvinkki.lukuvinkki_type == "Book") & ((Lukuvinkki.user_id == user_id) | ((Lukuvinkki.user_id != user_id) & (Lukuvinkki.is_public == True)))).filter(Lukuvinkki.title.ilike("%" + searchterm +"%")).order_by(Lukuvinkki.lukuvinkki_id.desc()).all()
+        return Lukuvinkki.query.filter((Lukuvinkki.lukuvinkki_type == "Book") & (Lukuvinkki.user_id == user_id)).filter(Lukuvinkki.title.ilike("%" + searchterm +"%")).order_by(Lukuvinkki.lukuvinkki_id.desc()).all()
 
     def get_blog_posts(self, user_id, searchterm=""):
-        return Lukuvinkki.query.filter((Lukuvinkki.lukuvinkki_type == "Blog post") & ((Lukuvinkki.user_id == user_id) | ((Lukuvinkki.user_id != user_id) & (Lukuvinkki.is_public == True)))).filter(Lukuvinkki.title.ilike("%" + searchterm +"%")).order_by(Lukuvinkki.lukuvinkki_id.desc()).all()
+        return Lukuvinkki.query.filter((Lukuvinkki.lukuvinkki_type == "Blog post") & (Lukuvinkki.user_id == user_id)).filter(Lukuvinkki.title.ilike("%" + searchterm +"%")).order_by(Lukuvinkki.lukuvinkki_id.desc()).all()
 
     def get_podcasts(self, user_id, searchterm=""):
-        return Lukuvinkki.query.filter((Lukuvinkki.lukuvinkki_type == "Podcast") & ((Lukuvinkki.user_id == user_id) | ((Lukuvinkki.user_id != user_id) & (Lukuvinkki.is_public == True)))).filter(Lukuvinkki.title.ilike("%" + searchterm +"%")).order_by(Lukuvinkki.lukuvinkki_id.desc()).all()
+        return Lukuvinkki.query.filter((Lukuvinkki.lukuvinkki_type == "Podcast") & (Lukuvinkki.user_id == user_id)).filter(Lukuvinkki.title.ilike("%" + searchterm +"%")).order_by(Lukuvinkki.lukuvinkki_id.desc()).all()
 
     def get_youtubes(self, user_id, searchterm=""):
-        return Lukuvinkki.query.filter((Lukuvinkki.lukuvinkki_type == "Youtube") & ((Lukuvinkki.user_id == user_id) | ((Lukuvinkki.user_id != user_id) & (Lukuvinkki.is_public == True)))).filter(Lukuvinkki.title.ilike("%" + searchterm +"%")).order_by(Lukuvinkki.lukuvinkki_id.desc()).all()
+        return Lukuvinkki.query.filter((Lukuvinkki.lukuvinkki_type == "Youtube") & (Lukuvinkki.user_id == user_id)).filter(Lukuvinkki.title.ilike("%" + searchterm +"%")).order_by(Lukuvinkki.lukuvinkki_id.desc()).all()
 
+    def get_publics(self, user_id, searchterm=""):
+        return Lukuvinkki.query.filter((Lukuvinkki.user_id != user_id) & (Lukuvinkki.is_public == True)).filter(Lukuvinkki.title.ilike("%" + searchterm +"%")).order_by(Lukuvinkki.lukuvinkki_id.desc()).all()
+        
     def find_all(self):
         return Lukuvinkki.query.order_by(Lukuvinkki.lukuvinkki_id.desc()).all()
 
-# pylint: enable=line-too-long, disable=too-many-arguments
+# pylint: disable=too-many-arguments
 
     def create(self, lukuvinkki):
         db.session.add(lukuvinkki)
@@ -32,6 +35,7 @@ class LukuvinkkiRepository:
             lukuvinkki_id,
             title, author, isbn, link,
             description, comment,
+            is_public,
             lukuvinkki_type
             ):
         lukuvinkki = self.get_lukuvinkki(lukuvinkki_id)
@@ -41,14 +45,15 @@ class LukuvinkkiRepository:
         lukuvinkki.link = link
         lukuvinkki.descript = description
         lukuvinkki.comment = comment
+        lukuvinkki.is_public = is_public
         lukuvinkki.lukuvinkki_type = lukuvinkki_type
         db.session.commit()
 
 # pylint: disable=line-too-long
 
-    def check_lukuvinkki(self, title):
+    def check_lukuvinkki(self, title, user_id, lukuvinkki_type):
         query_title = Lukuvinkki.query.filter(Lukuvinkki.title == title).first()
-        if query_title is not None:
+        if query_title is not None and query_title.user_id == user_id and query_title.lukuvinkki_type == lukuvinkki_type:
             return True
         return False
 
@@ -63,11 +68,6 @@ class LukuvinkkiRepository:
     def delete_lukuvinkki(self, lukuvinkki_id):
         record_obj = Lukuvinkki.query.filter(Lukuvinkki.lukuvinkki_id==lukuvinkki_id).first()
         db.session.delete(record_obj)
-        db.session.commit()
-
-    def example_db_ops(self):
-        sql = "INSERT into test (username, password) VALUES (:username, :password);"
-        db.session.execute(sql, {"username": "demo", "password": "no-crypto"})
         db.session.commit()
 
 

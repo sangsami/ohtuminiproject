@@ -24,13 +24,17 @@ class LukuvinkkiService:
             description,
             comment,
             user_id,
-            is_public,
-            lukuvinkki_type
+            is_public=None,
+            lukuvinkki_type=None
             ):
         if len(title) == 0:
             raise LukuvinkkiTitle(
                 "Check that you have entered atleast a title.")
-        if self._lukuvinkki_repository.check_lukuvinkki(title):
+        if self._lukuvinkki_repository.check_lukuvinkki(
+            title,
+            user_id,
+            lukuvinkki_type
+            ):
             raise LukuvinkkiExistsError("The lukuvinkki already exists.")
         self._lukuvinkki_repository.create(Lukuvinkki(
             title,
@@ -84,6 +88,9 @@ class LukuvinkkiService:
 
     def get_youtubes(self, user_id, searchterm=""):
         return self._lukuvinkki_repository.get_youtubes(user_id, searchterm)
+    
+    def get_publics(self, user_id, searchterm=""):
+        return self._lukuvinkki_repository.get_publics(user_id, searchterm)
 
     def find_by_name(self, user_id, searchterm):
         return self._lukuvinkki_repository.find_by_name(user_id, searchterm)

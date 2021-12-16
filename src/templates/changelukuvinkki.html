@@ -55,6 +55,11 @@ Change current lukuvinkki
     <textarea name="comment" id="comment" rows="2" cols="50">{{ lukuvinkki.comment or '' }}</textarea>
   </div>
 
+  <div>
+    <input type="checkbox" name="visibility" value="checked" {{ "checked" if lukuvinkki.is_public }}>
+    <label for="visibility">Make public</label><br />
+  </div>
+
   <div class="btn-group">
     <input type="submit" name="save_button" value="Save">
     <input type="submit" name="view_button" value="View lukuvinkkis">
