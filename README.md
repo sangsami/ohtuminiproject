@@ -9,6 +9,8 @@
 
 [Product and sprint backlog](https://docs.google.com/spreadsheets/d/145NsXmY7jT6WsumzZvbi4rYTIaUCGEqMREgqgzbMiFY/edit?usp=sharing)
 
+[Final report](https://github.com/sangsami/ohtuminiproject/blob/main/final%20report.md)
+
 ## Definition of done:
 
 * Pass all unit tests made
