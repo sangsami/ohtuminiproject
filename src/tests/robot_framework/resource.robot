@@ -3,13 +3,15 @@ Library  SeleniumLibrary
 Library  ../../AppLibrary.py
 
 *** Variables ***
-${SERVER}  localhost:5000
+${SERVER}  127.0.0.1:5000
 ${BROWSER}  chrome
-${DELAY}  0 seconds
+${DELAY}  0.0 seconds
 ${HOME URL}  http://${SERVER}
 ${CHOOSETYPE_URL}  http://${SERVER}/choosetype
 ${ADDLUKUVINKKI URL}  http://${SERVER}/addlukuvinkki
 ${LUKUVINKKIVIEW URL}  http://${SERVER}/lukuvinkkiview
+${CHANGELUKUVINKKI URL}  http://${SERVER}/changelukuvinkki
+${CHANGETYPE URL}  http://${SERVER}/changetype
 ${LOGIN URL}  http://${SERVER}/login
 ${REGISTER URL}  http://${SERVER}/register
 ${LOGOUT URL}  http://${SERVER}/logout
@@ -33,6 +35,12 @@ Add Lukuvinkki Page Should Be Open
 Lukuvinkkiview Page Should Be Open
     Title Should Be  Lukuvinkki-View
 
+Changelukuvinkki Page Should Be Open
+    Title Should Be  Change current lukuvinkki
+
+Changetype Page Should Be Open
+    Title Should Be  Change lukuvinkkitype if needed
+
 Logout Page Should Be Open
     Title Should Be  Logout
 
@@ -53,6 +61,12 @@ Go To Add Lukuvinkki Page
 
 Go To Lukuvinkkiview Page
     Go To  ${LUKUVINKKIVIEW URL}
+
+Go To Changelukuvinkki Page
+    Go To  ${CHANGELUKUVINKKI URL}
+
+Go To Changetype Page
+    Go To  ${CHANGETYPE URL}
 
 Go To Login Page
     Go To  ${LOGIN URL}

@@ -59,6 +59,15 @@ Add Youtube Video
     Save
     Add Should Succeed
 
+Add Youtube Video From URL
+    Go To Choose Type Page
+    Select Youtube As Type
+    Set Youtube URL  https://www.youtube.com/watch?v=Lmw4lzjEqD8
+    Submit
+    Youtube Add Should Contain  seal.mp4
+    Save
+    Add Should Succeed
+
 Add Blog Post
     Go to Choose Type Page
     Select Blog Post As Type
@@ -96,6 +105,10 @@ Page Should Contain All Info
     Page Should Contain  ${description}
     Page Should Contain  ${link}
     Page Should Contain  ${comment}
+
+Youtube Add Should Contain 
+    [Arguments]  ${title}
+    Textfield Should Contain  title  ${title}
     
 Set Title
     [Arguments]  ${title}
@@ -108,6 +121,10 @@ Set Author
 Set Link
     [Arguments]  ${link}
     Input Text  link  ${link}
+
+Set Youtube URL
+    [Arguments]  ${link}
+    Input Text  youtube-url  ${link}
 
 Set Description
     [Arguments]  ${description}
