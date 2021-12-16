@@ -6,6 +6,9 @@ Test Setup  Run Keywords  Login
 Test Teardown  Go To Logout Page
 
 *** Test cases ***
+# Sprint 3 acceptance criterias:
+# As a user I can search by title
+
 Search For Something That Doesnt Exist
     Go To Search Page
     Set Searchterm  ThisClearlyDoesntExist

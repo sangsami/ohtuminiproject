@@ -6,6 +6,9 @@ Test Setup  Run Keywords  Login
 Test Teardown  Go To Logout Page
 
 *** Test Cases ***
+# Sprint 1 Acceptance criterias:
+
+# As a user I can add a book to my list
 Add Empty Book Lukuvinkki
     Go to Choose Type Page
     Select Book As Type
@@ -29,6 +32,7 @@ Add A Book With Just A Title
     Save
     Add Should Succeed
 
+# As a user I can add a link to my lukuvinkki, As a user I can add a link to my lukuvinkki, As a user I can add a comment to my lukuvinkki
 All Added Book Info Visible On View Page
     Go to Choose Type Page
     Select Book As Type
@@ -43,6 +47,7 @@ All Added Book Info Visible On View Page
     Go to Lukuvinkkiview Page
     Page Should Contain All Info  Hohto  Stephen King  Kauhuromaani vuodelta 1977  https://fi.wikipedia.org/wiki/Hohto  447 sivua pitkä
 
+#As a user I can add a podcast to my list, As a user I can define type for my lukuvinkki, As a user I can add different info to the lukuvinkki depending on it's type
 Add Podcast
     Go to Choose Type Page
     Select Podcast As Type
@@ -59,6 +64,24 @@ Add Youtube Video
     Save
     Add Should Succeed
 
+Add Blog Post
+    Go to Choose Type Page
+    Select Blog Post As Type
+    Submit
+    Set Title  esimerkki blogi postaus
+    Save
+    Add Should Succeed
+
+# As a user, I can see a list of all my lukuvinkkis
+View Lukuvinkki Button Takes to Lukuvinkkiview Page
+    Go to Choose Type Page
+    Select Book As Type
+    Submit
+    Click View Lukuvinkkis
+    Lukuvinkkiview Page Should Be Open
+
+# Sprint 3 Acceptance criterias:
+# As a user I can add lukuvinkki by youtube-url
 Add Youtube Video From URL
     Go To Choose Type Page
     Select Youtube As Type
@@ -75,20 +98,45 @@ Add Youtube Video With Bad URL
     Submit
     Add Should Fail With Message  Could not find any youtube videos with provided url
 
-Add Blog Post
-    Go to Choose Type Page
-    Select Blog Post As Type
-    Submit
-    Set Title  esimerkki blogi postaus
-    Save
-    Add Should Succeed
-
-View Lukuvinkki Button Takes to Lukuvinkkiview Page
+# As a user, I can add a lukuvinkki tied to my account
+Can See Private Lukuvinkki Added By Another account
     Go to Choose Type Page
     Select Book As Type
     Submit
-    Click View Lukuvinkkis
-    Lukuvinkkiview Page Should Be Open
+    Set Title  Harry Potter ja Azkabanin vanki
+    Set Author  J.K. Rowling
+    Set ISBN  9789513187040
+    Set Description   J. K. Rowlingin teossarjan kolmas osa
+    Set Link  https://www.adlibris.com/fi/kirja/harry-potter-ja-azkabanin-vanki-9789513187040
+    Set Comment  Nidottu
+    Set Public
+    Save
+    Go to Lukuvinkkiview Page
+    Click Logout
+    Go To Register Page
+    Register With  tyhjalukuvinkkikayttaja  veryStrongPassword  veryStrongPassword
+    Goto Login Page
+    Login With  tyhjalukuvinkkikayttaja  veryStrongPassword
+    Page Should Contain All Info  Harry Potter ja Azkabanin vanki  J.K. Rowling  J. K. Rowlingin teossarjan kolmas osa  https://www.adlibris.com/fi/kirja/harry-potter-ja-azkabanin-vanki-9789513187040  Nidottu
+
+Cannot See Private Lukuvinkki Added By Another account
+    Go to Choose Type Page
+    Select Book As Type
+    Submit
+    Set Title  Taru Sormusten Herrasta: Sormuksen ritarit
+    Set Author  J. R. R. Tolkien
+    Set ISBN  9789510468265
+    Set Description  Kaikenikäisten klassikko, tulvillaan seikkailua, jännitystä ja huumoria!
+    Set Link  https://www.adlibris.com/fi/e-kirja/taru-sormusten-herrasta-sormuksen-ritarit-9789510468265
+    Set Comment  E-kirja
+    Save
+    Go to Lukuvinkkiview Page
+    Click Logout
+    Go To Register Page
+    Register With  tyhjalukuvinkkikayttaja  veryStrongPassword  veryStrongPassword
+    Goto Login Page
+    Login With  tyhjalukuvinkkikayttaja  veryStrongPassword
+    Page Should Contain Not All Info  Taru Sormusten Herrasta: Sormuksen ritarit  J. R. R. Tolkien  Kaikenikäisten klassikko, tulvillaan seikkailua, jännitystä ja huumoria!  https://www.adlibris.com/fi/e-kirja/taru-sormusten-herrasta-sormuksen-ritarit-9789510468265  E-kirja
 
 *** Keywords ***
 Add Should Succeed
@@ -112,6 +160,14 @@ Page Should Contain All Info
     Page Should Contain  ${description}
     Page Should Contain  ${link}
     Page Should Contain  ${comment}
+
+Page Should Contain Not All Info
+    [Arguments]  ${title}  ${author}  ${description}  ${link}  ${comment}
+    Page Should Not Contain  ${title}
+    Page Should Not Contain  ${author}
+    Page Should Not Contain  ${description}
+    Page Should Not Contain  ${link}
+    Page Should Not Contain  ${comment}
 
 Youtube Add Should Contain 
     [Arguments]  ${title}  ${author}
@@ -146,11 +202,18 @@ Set ISBN
     [Arguments]  ${ISBN}
     Input Text  ISBN  ${ISBN}
 
+Set Public
+    Select Checkbox  visibility
+
 Save
     Click Button  save_button
 
 Submit
     Click Button  submit
+
+Click Logout
+    Click Link  Logout
+    Logout Page Should Be Open
 
 Click View Lukuvinkkis
     Click Button  view_button

@@ -6,6 +6,8 @@ Test Teardown  Go to Logout Page
 Suite Teardown  Close Browser
 
 *** Test Cases ***
+# Sprint 2 acceptance criterias:
+# As a user, I can register to the service
 Invalid Username Raises Error Message
     Go To Register Page
     Register With  1234567  veryStrongPassword  veryStrongPassword

@@ -178,7 +178,7 @@ Lukuvinkki-View
 
         {% if lukuvinkki.link %}
                 <b>Link: </b>
-                <a href="{{ youtube.link }}">{{ youtube.link }}</a><br>
+                <a href="{{ lukuvinkki.link }}">{{ lukuvinkki.link }}</a><br>
         {% endif %}
 
         {% if lukuvinkki.descript %}
@@ -186,7 +186,7 @@ Lukuvinkki-View
         {% endif %}
 
         {% if lukuvinkki.comment %}
-            <b>Comment:</b> {{ lukuvinkki.comment }}
+            <b>Comment:</b> {{ lukuvinkki.comment }}<br>
         {% endif %}
 
         <b>From user id:</b> {{ lukuvinkki.user_id }}<br>

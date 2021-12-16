@@ -85,3 +85,17 @@ Login
     Input Text  username  guest
     Input Text  password  veryStrongPassword
     Click Button  Login
+
+Login With
+    [Arguments]  ${username}  ${password}
+    Go To Login Page
+    Input Text  username  ${username}
+    Input Text  password  ${password}
+    Click Button  Login
+
+Register With
+    [Arguments]  ${username}  ${password}  ${password_again}
+    Input Text  username  ${username}
+    Input Text  password  ${password}
+    Input Text  password_confirmation  ${password_again}
+    Click Button  Register
