@@ -92,5 +92,34 @@ class TestLukuvinkkiRepository(unittest.TestCase):
         lukuvinkki_id = testvinkkis[0].lukuvinkki_id
         self.lukuvinkki_repository.change_lukuvinkki_status(lukuvinkki_id)
         flag = testvinkkis[0].is_read
-        self.lukuvinkki_repository.delete_lukuvinkki(lukuvinkki_id)
         self.assertTrue(flag)
+    
+    def test_repository_deletes_lukuvinkki(self):
+        lukuvinkki = Lukuvinkki(
+                        "Another title",
+                        "Another author",
+                        "Another isbn",
+                        "Another link",
+                        "Another description",
+                        "Another comment",
+                        1,
+                        is_read=False
+                        )
+        self.lukuvinkki_repository.create(lukuvinkki)
+        testvinkkis = self.lukuvinkki_repository.find_all()
+        lukuvinkki = testvinkkis[0]
+        self.assertEqual(lukuvinkki.title, "Another title")
+        self.assertEqual(lukuvinkki.author, "Another author")
+        self.assertEqual(lukuvinkki.isbn, "Another isbn")
+        self.assertEqual(lukuvinkki.link, "Another link")
+        self.assertEqual(lukuvinkki.descript, "Another description")
+        self.assertEqual(lukuvinkki.comment, "Another comment")
+        self.lukuvinkki_repository.delete_lukuvinkki(lukuvinkki.lukuvinkki_id)
+        testvinkkis = self.lukuvinkki_repository.find_all()
+        lukuvinkki = testvinkkis[0]
+        self.assertNotEqual(lukuvinkki.title, "Another title")
+        self.assertNotEqual(lukuvinkki.author, "Another author")
+        self.assertNotEqual(lukuvinkki.isbn, "Another isbn")
+        self.assertNotEqual(lukuvinkki.link, "Another link")
+        self.assertNotEqual(lukuvinkki.descript, "Another description")
+        self.assertNotEqual(lukuvinkki.comment, "Another comment")
