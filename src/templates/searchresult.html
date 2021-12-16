@@ -169,5 +169,35 @@ Lukuvinkki-search result
         <hr>
 {% endif %}
 
+{% if publics %}
+    <h2>Public lukuvinkkis: </h2>
+    {% for lukuvinkki in publics %}
+        <b>Type:</b> {{ lukuvinkki.lukuvinkki_type }}<br>
+        <b>Title:</b> {{ lukuvinkki.title }}<br>
+
+        {% if lukuvinkki.author %}
+            <b>Author:</b> {{ lukuvinkki.author }}<br>
+        {% endif %}
+
+        {% if lukuvinkki.link %}
+                <b>Link: </b>
+                <a href="{{ lukuvinkki.link }}">{{ lukuvinkki.link }}</a><br>
+        {% endif %}
+
+        {% if lukuvinkki.descript %}
+            <b>Description:</b> {{ lukuvinkki.descript }}<br>
+        {% endif %}
+
+        {% if lukuvinkki.comment %}
+            <b>Comment:</b> {{ lukuvinkki.comment }}<br>
+        {% endif %}
+
+        <b>From user id:</b> {{ lukuvinkki.user_id }}<br>
+
+        <br>
+        {% endfor %}
+        <hr>
+{% endif %}
+
 
 {% endblock %}
