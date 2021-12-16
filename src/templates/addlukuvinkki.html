@@ -26,18 +26,23 @@ Lukuvinkki-Add
     <label for="title">Title</label><br />
     <input type="text" name="title" id="title" value="{{ youtube_data.title }}"/>
   </div>
+  <div>
+    <label for="author">Author</label><br />
+    <input type="text" name="author" id="author" value="{{ youtube_data.author_name }}"/>
+    </div>
   {%  else %}
   <div>
     <label for="title">Title</label><br />
     <input type="text" name="title" id="title"/>
   </div>
-  {% endif %}
-  {% if "Youtube" not in lukuvinkki_type %}
-    <div>
+
+  <div>
     <label for="author">Author</label><br />
     <input type="text" name="author" id="author"/>
-    </div>
+  </div>
+
   {% endif %}
+ 
 
   {% if "Book" in lukuvinkki_type %}
     <div>

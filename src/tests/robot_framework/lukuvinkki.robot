@@ -64,9 +64,16 @@ Add Youtube Video From URL
     Select Youtube As Type
     Set Youtube URL  https://www.youtube.com/watch?v=Lmw4lzjEqD8
     Submit
-    Youtube Add Should Contain  seal.mp4
+    Youtube Add Should Contain  seal.mp4  Storklathe
     Save
     Add Should Succeed
+
+Add Youtube Video With Bad URL
+    Go To Choose Type Page
+    Select Youtube As Type
+    Set Youtube URL  nolink
+    Submit
+    Add Should Fail With Message  Could not find any youtube videos with provided url
 
 Add Blog Post
     Go to Choose Type Page
@@ -107,8 +114,9 @@ Page Should Contain All Info
     Page Should Contain  ${comment}
 
 Youtube Add Should Contain 
-    [Arguments]  ${title}
+    [Arguments]  ${title}  ${author}
     Textfield Should Contain  title  ${title}
+    Textfield Should Contain  author  ${author}
     
 Set Title
     [Arguments]  ${title}
