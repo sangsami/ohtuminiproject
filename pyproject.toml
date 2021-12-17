@@ -20,6 +20,7 @@ python-dotenv = "^0.19.2"
 Flask-WTF = "^1.0.0"
 Flask-Login = "^0.5.0"
 invoke = "^1.6.0"
+pytz = "^2021.3"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.5"
