@@ -1,4 +1,6 @@
 from datetime import datetime
+import pytz
+from pytz import timezone
 from app import db
 # pylint: disable=no-member, disable=too-many-arguments
 class Lukuvinkki(db.Model):
@@ -49,13 +51,14 @@ class Lukuvinkki(db.Model):
 
     def read_status(self):
         if self.read_timestamp is not None:
-            reading_time = self.read_timestamp
+            reading_time = self.read_timestamp.astimezone(timezone('Europe/Helsinki'))
             reading_time = reading_time.strftime("%d.%m.%y  %H:%M")
         return f"Read - {reading_time:>15}" if self.is_read else "Not read"
 
     def change_read(self):
         self.is_read = not self.is_read
-        self.read_timestamp = datetime.now()
+        self.read_timestamp = datetime.now(pytz.timezone('Europe/Helsinki'))
+        print(self.read_timestamp)
 
     def __str__(self):
         return f"{self.lukuvinkki_type}: {self.title}"
