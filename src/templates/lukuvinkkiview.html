@@ -74,7 +74,7 @@ Lukuvinkki-View
         {% endif %}
 
         {% if blog_post.comment %}
-            <b>Comment:</b> {{ blog_post.comment }}
+            <b>Comment:</b> {{ blog_post.comment }}<br>
         {% endif %}
 
         <b>Status:</b> {{ blog_post.read_status() }}<br>
@@ -112,7 +112,7 @@ Lukuvinkki-View
         {% endif %}
 
         {% if podcast.comment %}
-            <b>Comment:</b> {{ podcast.comment }}
+            <b>Comment:</b> {{ podcast.comment }}<br>
         {% endif %}
 
         <b>Status:</b> {{ podcast.read_status() }}<br>
@@ -149,7 +149,7 @@ Lukuvinkki-View
         {% endif %}
 
         {% if youtube.comment %}
-            <b>Comment:</b> {{ youtube.comment }}
+            <b>Comment:</b> {{ youtube.comment }}<br>
         {% endif %}
 
         <b>Status:</b> {{ youtube.read_status() }}<br>

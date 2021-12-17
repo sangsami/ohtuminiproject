@@ -33,7 +33,6 @@ def handle_choosetype():
     if lukuvinkki_type == 'Youtube' and url:
         data = get_youtube_information_from_url(url)
         if data:
-            print(data)
             return render_addlukuvinkki(lukuvinkki_type=lukuvinkki_type, youtube_data=data)
         flash('Could not find any youtube videos with provided url')
     return render_addlukuvinkki(lukuvinkki_type=lukuvinkki_type)
