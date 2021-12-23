@@ -4,11 +4,12 @@ Sami Dinh, Jan Rundt, Pentti Lähdeaho, Iida Vilkkinen
 
 ## Sprinttien aikana kohdatut ongelmat
 
-Sprint 1:  
+Sprint 1:
+- Ensimmäisessä sprintissä kellään ei ollut vielä käytännön kokemusta scrumista, joten suurimpina haasteina olivat työskentelytekniikoiden oppiminen (estimointi, sprint planning jne.)
 - Ensimmäisen sprintin aikana kului yllättävänkin suuri aika jo pelkkään konfigurointiin ja oppien mieleen palauttamiseen web-sovelluksiin liittyen. Myöskin uuden tehtävän ja ryhmän kanssa työnjaon tekeminen tapahtui muihin sprintteihin verrattuna hieman verkkaisemmin, vaikka onnistuikin kuitenkin lopulta ihan hyvin. Vaikeutta lisäsi kuitenkin se, että jotkin toiminnallisuudet oli helpompi luoda vasta kun oli saatu jokun aikaisempi userstory toteutettua, mikä vaati hyvää organisointia ryhmän työajan ja tehtävien jaon suhteen.
 - Herokun käyttöönotto tuotti hieman ongelmia, joita monella tapaa yritettiin ratkaista (esim. Herokussa Docker kontin ajaminen). Heroku ei suoraan tue Poetrya, joten piti kikkailla. 
 
-Sprint 2:  
+Sprint 2: 
 - Tässä sprintissä piti saada pysyvä tallennus toimimaan, ja yksi haaste oli saada github-actioneihin tietokanta. Github-actioneissä on se hankala puoli, että niitä pystyy vain testaamaan "tuotannossa", eli tekemällä suuren määrän committejä kunnes löytyy toimiva ratkaisu. Tämä jättää ikään kuin ruman jäljen repositoryn historiaan. Ratkaisu tälle oli tehdä testit toista repositorya vastaan, taisi mennä jotain 25 committia ennen kuin toimi kuten pitäisi.
 
 Sprint 3:
@@ -24,6 +25,7 @@ Sujui hyvin:
 
 Parantamisen varaa:
 - Branchien ja/tai pullareiden käyttöönotto, ettei pushata suoraan main-branchiin ja mahdollisesti hajoteta asioita
+- Retrospektiivien pitäminen jäi välillä afterthoughtsiksi, eikä sille yleensä muistettu varata aikaa
 
 ## Mitä asioita opittiin, mitä asioita olisimme halunneet oppia, mikä tuntui turhalta
 
