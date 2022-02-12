@@ -27,16 +27,10 @@ class Lukuvinkki(db.Model):
             description,
             comment,
             user_id,
-            is_public=None,
-            lukuvinkki_type=None,
-            is_read=None
+            is_public=False,
+            lukuvinkki_type="Book",
+            is_read=False
             ):
-        if is_public is None:
-            is_public = False
-        if lukuvinkki_type is None:
-            lukuvinkki_type = "Book"
-        if is_read is None:
-            is_read = False
         self.title = title
         self.author = author
         self.isbn = isbn
